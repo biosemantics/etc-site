@@ -1,0 +1,298 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:style>
+		.actionImage {
+			background-size: 100% 100%;
+		    width: 40px;
+		    height: 40px;
+		    position: absolute;
+			left: 0px;
+		}
+		.semanticMarkupImage {
+		    background-image: url('images/SemanticMarkup.gif');
+		    top: 0px;
+		}
+		.matrixGenerationImage {
+		    background-image: url('images/MatrixGeneration.gif');
+		    top: 230px;
+		}
+		.ontologizeImage {
+		    background-image: url('images/Ontologize.gif');
+		    top: 115px;
+		}
+		
+		.actionText {
+		    background-size: 100% 100%;
+			width: 175px;
+		    height: 24px;
+		    position: absolute;
+		    left: 60px;
+		}
+		.semanticMarkupText {
+		    background-image: url('images/Text.SemanticMarkup.gif');
+		    top: 0px;
+		}
+		.matrixGenerationText {
+		    background-image: url('images/Text.MatrixGeneration.gif');
+		    top: 230px;
+		}
+		.ontologizeText {
+		    background-image: url('images/Text.Ontologize.gif');
+		    top: 115px;
+		}
+		.actionDescription {
+			width: 600px;
+		    position: absolute;
+		    left: 60px;
+		    font-size: 14.3px;
+		    
+		}
+		.semanticMarkupDescription {
+		    top: 35px;
+		}
+		.matrixGenerationDescription {
+		    top: 265px;
+		}
+		.ontologizeDescription {
+		    top: 150px;
+		}
+		.actionArrow {
+		    background-image: url('images/Arrow.gif');
+		    background-size: 100% 100%;
+		    width: 35px;
+		    height: 94px;
+		    position: absolute;
+		    left: 680px;
+		    padding-left: 20px;
+		}
+		.semanticMarkupArrow {
+		    top: 0px;
+		}
+		.matrixGenerationArrow {
+		    top: 230px;
+		}
+		.ontologizeArrow {
+		    top: 115px;
+		}
+		.actionButton  {
+		    /*background-image: url('images/ButtonGreen.gif'); */
+		    background-size: 100% 100%;
+		    width: 200px;
+		    height: 50px;
+		    position: absolute;
+		    left: 730px;
+		}
+		.semanticMarkupButton {
+		    top: 22px;
+		}
+		.semanticMarkupButtonText {
+		    width: 240px;
+		    position: absolute;
+		    top: 40px;
+		    left: 774px;
+		}
+		.matrixGenerationButton {
+		    top: 252px;
+		}
+		.ontologizeButton {
+		    top: 137px;
+		}
+		.matrixGenerationButtonText {
+		    width: 240px;
+		    position: absolute;
+		    top: 270px;
+		    left: 765px;
+		}
+		.ontologizeButtonText {
+		    width: 240px;
+		    position: absolute;
+		    top: 155px;
+		    left: 765px;
+		}
+		.treeGenerationImage {
+		    background-image: url('images/TreeGeneration.gif');
+		    top: 345px;
+		}
+		.treeGenerationText {
+		    background-image: url('images/Text.TreeGeneration.gif');
+		    top: 345px;
+		}
+		.treeGenerationDescription {
+		    top: 380px;
+		}
+		.treeGenerationArrow {
+		    top: 345px;
+		}
+		.treeGenerationButton {
+		    top: 367px;
+		}
+		.treeGenerationButtonText {
+		    width: 240px;
+		    position: absolute;
+		    top: 385px;
+		    left: 770px;
+		}
+		.taxonomyComparisonImage {
+		    background-image: url('images/TaxonomyComparison.gif');
+		    top: 460px;
+		}
+		.taxonomyComparisonText {
+		    background-image: url('images/Text.TaxonomyComparison.gif');
+		    top: 460px;
+		}
+		.taxonomyComparisonDescription {
+		    top: 495px;
+		}
+		.taxonomyComparisonArrow {
+		    top: 460px;
+		}
+		.taxonomyComparisonButton {
+		    top: 482px;
+		}
+		.taxonomyComparisonButtonText {
+		    width: 240px;
+		    position: absolute;
+		    top: 500px;
+		    left: 747px;
+		}
+		.visualizationImage {
+		    background-image: url('images/Visualization_unselected.gif');
+		    top: 575px;
+		}
+		.visualizationText {
+		    background-image: url('images/Text.Visualization.gif');
+		    /*width: 191px;
+		    height: 24px;*/
+		    top: 575px;
+		}
+		.visualizationDescription {
+		    top: 610px;
+		}
+		.visualizationArrow {
+		    top: 575px;
+		}
+		.visualizationButton {
+		    top: 597px;
+		}
+		.visualizationButtonText {
+		    width: 240px;
+		    position: absolute;
+		    top: 615px;
+		    left: 775px;
+		}
+		.orText {
+		    background-image: url('images/Text.Or.gif');
+		    background-size: 100% 100%;
+		    width: 50px;
+		    height: 39px;
+		    position: absolute;
+		    top: 720px;
+		    left: 670px;
+		}
+		.pipelineButton {
+		    background-image: url('images/ButtonGray.gif');
+		    background-size: 100% 100%;
+		    width: 200px;
+		    height: 50px;
+		    position: absolute;
+		    top: 712px;
+		    left: 730px;
+		}
+		.pipelineButtonText {
+		    width: 240px;
+		    position: absolute;
+		    top: 730px;
+		    left: 775px;
+		} 
+		.clickable {
+			cursor: pointer;
+		}
+		.absolutePositioned {
+			position: absolute;
+		}
+
+		
+		
+		
+		
+	</ui:style>
+	<g:HTMLPanel styleName="{style.absolutePositioned} font">
+		<div class="{style.semanticMarkupImage} {style.actionImage}"></div>
+		<div class="{style.semanticMarkupText} {style.actionText}"></div>
+		<div class="{style.semanticMarkupDescription} {style.actionDescription} ">
+		    Captures characters from taxonomic descriptions by performing a process called “semantic markup”. It generates marked-up files that can then 
+		    be used to create a taxon-character matrix automatically. This tool is powered by CharaParser and MicroPIE. 
+		</div>
+		<div class="{style.semanticMarkupArrow} {style.actionArrow}"></div>
+		<g:HTML ui:field="semanticMarkupButton">
+			<div class="{style.semanticMarkupButton} {style.actionButton} {style.clickable}"><img src="images/ButtonGreen.gif" width="200px" height="50px"/></div>
+			<div class="{style.semanticMarkupButtonText} {style.clickable}">Begin Text Capture</div> 
+		</g:HTML>
+		
+		<div class="{style.ontologizeImage} {style.actionImage}"></div>
+		<div class="{style.ontologizeText} {style.actionText}"></div>
+		<div class="{style.ontologizeDescription} {style.actionDescription} ">
+			Allows to build taxon specific ontologies using the anatomical and character terms identified by Text Capture. Ontologies are optional for Matrix Generation, but having them help to generate less sparse matrices. 
+		</div>
+		<div class="{style.ontologizeArrow} {style.actionArrow}"></div>
+		<g:HTML ui:field="ontologizeButton">
+			<div class="{style.ontologizeButton} {style.actionButton} {style.clickable}"><img src="images/ButtonGreen.gif" width="200px" height="50px"/></div>
+			<div class="{style.ontologizeButtonText} {style.clickable}">Begin Ontology Building</div>
+		</g:HTML>
+		
+		<div class="{style.matrixGenerationImage} {style.actionImage}"></div>
+		<div class="{style.matrixGenerationText} {style.actionText}"></div>
+		<div class="{style.matrixGenerationDescription} {style.actionDescription} ">
+			Generates taxon-character matrices from semantically marked-up descriptions of organisms. The matrices can be used to create specimen identification keys, or be downloaded
+			 and used with other matrix analysis tools. 
+		</div>
+		<div class="{style.matrixGenerationArrow} {style.actionArrow}"></div>
+		<g:HTML ui:field="matrixGenerationButton">
+			<div class="{style.matrixGenerationButton} {style.actionButton} {style.clickable}"><img src="images/ButtonGreen.gif" width="200px" height="50px"/></div>
+			<div class="{style.matrixGenerationButtonText} {style.clickable}">Begin Matrix Generation</div>
+		</g:HTML>
+		
+		<div class="{style.treeGenerationImage} {style.actionImage}"></div>
+		<div class="{style.treeGenerationText} {style.actionText}"></div>
+		<div class="{style.treeGenerationDescription} {style.actionDescription}">
+			Generates an interactive identification key from a taxon-character matrix, using an information entropy based method which treats character polymorphisms gracefully.  
+		</div>
+		<div class="{style.treeGenerationArrow} {style.actionArrow}"></div>
+		<g:HTML ui:field="treeGenerationButton">
+			<div class="{style.treeGenerationButton} {style.actionButton} {style.clickable}"><img src="images/ButtonGreen.gif" width="200px" height="50px"/></div>
+			<div class="{style.treeGenerationButtonText} {style.clickable}">Begin Key Generation</div>
+		</g:HTML>
+		
+		<div class="{style.taxonomyComparisonImage} {style.actionImage}"></div>
+		<div class="{style.taxonomyComparisonText} {style.actionText}"></div>
+		<div class="{style.taxonomyComparisonDescription} {style.actionDescription} {}">
+			How do two related taxonomies taxonomies differ? The taxonomy comparison tool takes user-provided relationships between taxa (e.g. =, >) and optionally 
+			output from Matrix/Key Generation (under-development), and performs logic reasoning to identify conflicts and/or ambiguities and finally align two taxonomies.
+		</div>
+		<div class="{style.taxonomyComparisonArrow} {style.actionArrow}"></div>
+		<g:HTML ui:field="taxonomyComparisonButton">
+			<div class="{style.taxonomyComparisonButton} {style.actionButton} {style.clickable}"><img src="images/ButtonGreen.gif" width="200px" height="50px"/></div>
+			<div class="{style.taxonomyComparisonButtonText}">Begin Taxonomy Comparison</div>
+		</g:HTML>
+
+		<!--<div class="{style.visualizationImage} {style.actionImage}"></div>
+		<div class="{style.visualizationText} {style.actionText}"></div>
+		<div class="{style.visualizationDescription} {style.actionDescription}">Integrates
+			relationships among taxa and relationships between character and taxa in a visual way to facilitate taxon concept comparison and analysis.
+		</div>
+		<div class="{style.visualizationArrow} {style.actionArrow}"></div> -->
+		<!--<g:HTML ui:field="visualizationButton">
+			<div class="{style.visualizationButton} {style.actionButton} {style.clickable}"><img src="images/ButtonGray.gif" width="200px" height="50px"/></div>
+			<div class="{style.visualizationButtonText}">Begin Visualization</div>
+		</g:HTML>-->
+        
+		<!--   <div class="{style.orText}"></div>
+		<g:HTML ui:field="pipelineButton">
+			<div class="{style.pipelineButton}"><img src="images/ButtonGray.gif" width="200px" height="50px"/></div>
+			<div class="{style.pipelineButtonText}">Begin New Pipeline</div>
+		</g:HTML>--> 
+		
+		
+	</g:HTMLPanel>
+</ui:UiBinder> 

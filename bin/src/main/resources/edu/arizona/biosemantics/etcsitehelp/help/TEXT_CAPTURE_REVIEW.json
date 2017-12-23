@@ -1,0 +1,38 @@
+[
+	{
+		"title": "<b>What should I do in Review?</b>",
+        "content": "<b>Review and categorize the terms</b> the system has discovered from the input files. Terms that are known the systems are pre-categorized into the category boxes on the right (shown in brown). You can change those decisions. <br><br><b>How to categorize?</b><br>Move character-bearing terms from the left panel to the category boxes on the right by <b>drag-and-drop</b> or through <b>the pop-up menus invoked by a right-click</b> on a term.<br><br>Please also <b>synonymize synonyms</b>. <br><br>Terms left uncategorized will not be used in tagging characters. <br><br><b>If the task is shared</b> with others, the latest result among all users of a shared task is shown for each of the user."},
+    {
+		"title": "<b>(Un)Categorize terms</b>",
+		"content": "Two ways to <i>categorize</i> a term: <br>1. <b>Drag the term from left</b> and <b>drop it</b> in the yellow area in an appropriate category box. <br><b>2. Right-click</b> on a term to invoke its popup menu. <br><br>Two ways to <i>uncategorize</i> a term: <br>1. <b>Drag the term from a category box</b> and <b>drop it</b> in the left term list. <br>2. <b>Right-click on the term</b> to invoke its popup menu, then <b>select <span style='color:green'>Categorize &gt; Remove</span></b>."},
+	{
+		"title": "<b>Import categorizations</b>",
+		"content": "<b>File menu</b>, &gt; <span style='color:green'><b>Import categorization</b></span>."},
+	{
+		"title": "<b>Discard categorization results</b>",
+		"content": "In case you want to discard all categorization results -- empty <i>all</i> category boxes and return terms to the left panel: <br><b>File menu</b>, <span style='color:green'><b>Remove Categorizations &gt; All</b></span> <br><br>If you want to just discard <i>users'</i> categorization results, which will keep the system's categorization in place but remove your and your sharee's imported and manual categorizations: <br><b>File menu</b>, <span style='color:green'><b>Remove Categorization &gt; Users categorizations</b></span>."},
+	{
+		"title": "<b>Terms not describing characters</b>",
+		"content": "The system may list 'bad' terms (not useful for describing any character) for you to categorize. Two ways to deal with these terms: <br>1. Simply <b>leave them uncategorized.</b><br> 2. Move them to <b>Trash</b> folder in the left panel, by drag-and-drop or invoking a pop-up menu by right-click on the term."},
+	{
+		"title": "<b>Make synonyms</b>",
+		"content": "If two terms are synonyms or alternative spellings, you should make them synonyms by <b>dragging term 1 onto term 2</b>. Term 2 will be considered a preferred term (marked with a folder icon), holding all its synonyms, e.g., term 1.<br><br>To break up a synonym relation, <b>right-click on the preferred term</b> (marked with a folder icon) to invoke its popup menu, select <span style='color:green'><b>Synonymize</b></span>, then <span style='color:green'><b>Remove Synonyms</b></span> or <span style='color:green'><b>Remove All Synonyms</b></span>. The released synonyms will remain in the same category."},
+	{
+		"title": "<b>Terms belong to multiple categories</b>",
+		"content": "A term can be categorized into multiple categories if needed. <br><br>If the term is currently <i>uncategorized</i>, <b>right-click on the term</b> to invoke its popup menu, then <b>select <span style='color:green'> Categorize &gt; Categorize to</span></b> and <b>select appropriate categories</b>.<br><br>If the term is <i>categorized</i>, <b>drag and drop the term</b> to additional desired categories and <b>select <span style='color:green'>Copy</span></b> when prompted, or <b>right-click on the term</b> to invoke its popup menu, then <b>select <span style='color:green'><b>Categorize &gt; Copy to</b></span></b> and <b>select appropriate categories</b>."},
+	{
+		"title": "<b>Correct typos and add comments</b>",
+		"content": "To <i>correct typos</i>, <b>right-click on a term</b> to invoke its popup menu, <b>select <span style='color:green'><b> Term &gt; Correct Spelling</b></span></b>. <br><br>To <i>comment</i> on a term, <b>right-click on a term</b> to invoke its popup menu, <b>select <span style='color:green'><b>Term &gt; Comment</b></span></b>. You can view all the comments made on the current set of terms using the <b><span style='color:green'>Comments</span></b> menu."},
+	{
+		"title": "<b>Create a new category</b>",
+		"content": "To add a new category to the right panel, <b>right-click on white space anywhere</b> in the <span style='color:green'><b>Categories and Categorization Results</b></span> area to invoke its popup menu, and <b>select <span style='color:green'>Category &gt; Add</span></b>. Provide a definition for the category you created. <br><br><b> Caution:</b> All terms in category boxes will be used to generate characters for a taxon-character matrix.<span style='color:red'> Please do not create temporary convenient categories such as 'difficult terms', 'misspellings' etc. Good categories are characters your organisms have with a set of known states. </span>"},
+	{
+		"title": "<b>View term information</b>",
+		"content": "<span style='color:green'><b>Term Information area</b></span>, located at the lower part of the screen, provides you additional information about the terms. <br><br><b>Locations tab:</b> shows the categories a selected term currently is in. <br><b>Context tab</b>: shows the source sentences where a selected term appears in the input descriptions. <br><b>Ontologies tab</b>: shows the definitions of a selected term in BioPortal ontologies. <br><br>You can include ontologies of your choice by using <b>the <span style='color:green'>Ontologies menu</b></span> on the menu bar - including too many ontologies will slow down system responding time. The ontologies selected are not used in subsequence processing steps at this time. "},
+	{
+		"title": "<b>Search terms</b>",
+		"content": "Use the <span style='color:green'><b>Search</b></span> menu on the main menu bar. Search results will be shown in the Locations tab."},
+	{
+		"title": "<b>Download categorization results</b>",
+		"content": "<span style='color:green'><b>File &gt; Download Categorization Results</b></span>." }
+]
