@@ -1,0 +1,38 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui"
+	xmlns:my="urn:import:edu.arizona.biosemantics.etcsite.client.common">
+	<ui:style>
+		.subMenuEntry {
+			margin-left: 20px;
+		}
+		.subMenu {
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		
+		.bold {
+			font-weight: bold;
+		}
+		.padding {
+			padding-top: 10px;
+			padding-bottom: 10px;
+		}
+		.header{
+			padding-top: 15px;
+        }
+
+	</ui:style>
+	<g:VerticalPanel>
+		<g:HorizontalPanel styleName="{style.header}">
+			<g:InlineLabel styleName="{style.bold}">Taxonomy Comparison facilitates experts to create possible alignments between two taxonomies. 
+			It consists of the following steps: </g:InlineLabel>
+		</g:HorizontalPanel>
+		<g:HorizontalPanel styleName="{style.subMenu}">
+			<g:Label styleName="{style.subMenuEntry}">You are at: </g:Label>
+			<my:ImageLabel ui:field="createInput" styleName="{style.subMenuEntry}" imagePath="images/Enumeration_unselected_1.gif" imageWidth="20px" imageHeight="20px" text="Create Input" systemFolder="false"></my:ImageLabel>
+			<my:ImageLabel ui:field="input" styleName="{style.subMenuEntry}" imagePath="images/Enumeration_unselected_2.gif" imageWidth="20px" imageHeight="20px" text="Define Task" systemFolder="false"></my:ImageLabel>
+			<my:ImageLabel ui:field="run" styleName="{style.subMenuEntry}" imagePath="images/Enumeration_unselected_3.gif" imageWidth="20px" imageHeight="20px" text="Align" systemFolder="false"></my:ImageLabel>
+		</g:HorizontalPanel>
+	</g:VerticalPanel>
+</ui:UiBinder> 

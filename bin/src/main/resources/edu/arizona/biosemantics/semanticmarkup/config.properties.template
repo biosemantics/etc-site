@@ -1,0 +1,16 @@
+databaseHost=
+databasePort=
+databaseName=
+databaseUser=
+databasePassword=
+workspaceDirectory=
+perlSourceDirectory=
+wordNetSourceDirectory=
+glossariesDownloadDirectory=
+ontologiesDirectory=
+otoUrl=
+oto2Url=
+threading=false,1,1  #format {true,false},{n},{m}  where first parameter activates,deactivates; n=, m=
+database_partitionCount=
+database_minConnectionsPerPartition=
+database_maxConnectionsPerPartition=
