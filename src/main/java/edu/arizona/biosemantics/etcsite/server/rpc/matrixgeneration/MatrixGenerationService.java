@@ -810,6 +810,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		try{
 			switch(format){
 				case CSV: matrixFileUtil.generateSimpleCSV(path, model.getTaxonMatrix());break;
+				case CSVS: matrixFileUtil.generateSimpleCSVwithSentences(path, model.getTaxonMatrix());break;
 				case MCCSV: matrixFileUtil.generateMatrixConverterCSV(path, model.getTaxonMatrix());break;
 				case NEXUS: break;
 				case NEXML: break;
