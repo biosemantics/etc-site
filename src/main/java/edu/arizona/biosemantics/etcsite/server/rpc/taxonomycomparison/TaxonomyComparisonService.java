@@ -44,6 +44,7 @@ import edu.arizona.biosemantics.etcsite.server.rpc.taxonomycomparison.commands.C
 import edu.arizona.biosemantics.etcsite.server.rpc.taxonomycomparison.commands.ExtraJvmInputVisualization;
 import edu.arizona.biosemantics.etcsite.server.rpc.taxonomycomparison.commands.ExtraJvmPossibleWorldsGeneration;
 import edu.arizona.biosemantics.etcsite.server.rpc.taxonomycomparison.commands.InJvmConsistencyCheck;
+import edu.arizona.biosemantics.etcsite.server.rpc.taxonomycomparison.commands.InJvmInputVisualization;
 import edu.arizona.biosemantics.etcsite.server.rpc.taxonomycomparison.commands.InputVisualization;
 import edu.arizona.biosemantics.etcsite.server.rpc.taxonomycomparison.commands.PossibleWorldsGeneration;
 import edu.arizona.biosemantics.etcsite.shared.model.AbstractTaskConfiguration;

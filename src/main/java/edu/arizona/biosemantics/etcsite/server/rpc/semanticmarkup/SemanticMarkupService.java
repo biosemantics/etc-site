@@ -216,10 +216,18 @@ public class SemanticMarkupService extends RemoteServiceServlet implements ISema
 	}
 	
 	public static void main(String[] args) throws Exception {
+		/*not for general debugging purposes. They don't run without a specific setting*/
 		final Learn learn = new InJvmLearn(new DAOManager(), null
 				, "Plant", false, 
-				"/home/biosemantics/workspace2015/etc-site/users/1/CoolFiles", "test" + ('a' + (int)(Math.random()*26)) + ('a' + (int)(Math.random()*26)), "", "");
-		learn.call();
+				//"C:/Users/hongcui/Documents/research/AuthorOntology/Data/Carex_from_FNA_no_Keys", "30" , "", "");
+				"C:/Users/hongcui/Documents/etc-development/charaparser", "3" , "", "");
+
+				learn.call();
+		
+		final Parse parse = new InJvmParse("Plant", false, 
+				//"C:/Users/hongcui/Documents/research/AuthorOntology/Data/Carex_from_FNA_no_Keys", "30" /*+ ('a' + (int)(Math.random()*26)) + ('a' + (int)(Math.random()*26))*/, "", "");
+				"C:/Users/hongcui/Documents/etc-development/charaparser", "3" , "", "");
+				parse.call();
 	}
 	
 	@Override
@@ -373,8 +381,8 @@ public class SemanticMarkupService extends RemoteServiceServlet implements ISema
 			//Parse parse = new ExtraJvmParse(taxonGroup, useEmptyGlossary, input, tablePrefix, source, operator);
 			Parse parse = new InJvmParse(taxonGroup, useEmptyGlossary, input, tablePrefix, source, operator);
 			if(config.getTaxonGroup().getName().equals("Bacteria")) 
-				parse = new InJvmMicropieParse(input, outputDirectory, Configuration.micropie_models);
-				//parse = new ExtraJvmMicropieParse(input, outputDirectory, Configuration.micropie_models);
+				//parse = new InJvmMicropieParse(input, outputDirectory, Configuration.micropie_models);
+				parse = new ExtraJvmMicropieParse(input, outputDirectory, Configuration.micropie_models);
 			
 			final Parse finalParse = parse;
 			

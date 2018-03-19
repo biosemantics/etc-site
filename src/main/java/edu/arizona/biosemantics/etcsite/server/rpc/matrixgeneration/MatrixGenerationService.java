@@ -80,6 +80,7 @@ import edu.arizona.biosemantics.matrixgeneration.model.Provenance;
 import edu.arizona.biosemantics.matrixgeneration.model.SemanticMarkupProvenance;
 import edu.arizona.biosemantics.matrixgeneration.model.TaxonomyDescendantInheritanceProvenance;
 import edu.arizona.biosemantics.matrixgeneration.model.complete.AbsentPresentCharacter;
+import edu.arizona.biosemantics.matrixgeneration.model.complete.Values;
 import edu.arizona.biosemantics.matrixgeneration.model.raw.CellValue;
 import edu.arizona.biosemantics.matrixgeneration.model.raw.ColumnHead;
 import edu.arizona.biosemantics.matrixgeneration.model.raw.Matrix;
@@ -321,8 +322,8 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		
 		
 		final String enhanceDir = this.getTempDir(task) + File.separator + "enhance";
-		//final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
-		final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		//Don't use this final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
 		
 		activeEnhanceProcess.put(config.getConfiguration().getId(), enhance);
 		final ListenableFuture<Void> futureResult = executorService.submit(enhance);
@@ -379,8 +380,8 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		String taxonGroup = config.getTaxonGroup().getName().toUpperCase();
 		
 		final String enhanceDir = this.getTempDir(task) + File.separator + "enhance";
-		//final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
-		final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		//Don't use this final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
 		activeEnhanceProcess.put(config.getConfiguration().getId(), enhance);
 		final ListenableFuture<Void> futureResult = executorService.submit(enhance);
 		this.activeProcessFutures.put(config.getConfiguration().getId(), futureResult);
@@ -436,7 +437,6 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		//because etc-site and matrix generation uses different versions of OWLAPI, always use ExtraJvm for local and server.
 		final MatrixGeneration matrixGeneration = new ExtraJvmMatrixGeneration(inputDir, taxonGroup, 
 		outputFile, inheritValues, generateAbsentPresent, true);
-		// server uses InJvmMatrixGeneration
 		//final MatrixGeneration matrixGeneration = new InJvmMatrixGeneration(inputDir, taxonGroup, 
 		//outputFile, inheritValues, generateAbsentPresent, true);
 		
@@ -959,8 +959,15 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    		//System.out.println("character " + character.getName() + " value " + cellValue.getText());
 		    		//System.out.println(cellValue.getGenerationProvenance());
 		    		
-		    		String value = cellValue.getText();
-		    		Value v = new Value(value);
+		    		/* 3.19.18
+		    		 * String value = cellValue.getText();
+		    		Value v = new Value(value);*/
+		    		Values values = cellValue.getSource();
+		    		//check represenative value: what exact is that?
+		    		edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue = values.getRepresentative();
+		    		Value v = constructMatrixReviewValueFromCompleteValue(aValue);
+		    		
+		    		
 		    		
 		    		for(edu.arizona.biosemantics.matrixgeneration.model.complete.Value cvalue : cellValue.getSource()) {
 		    			//if(cvalue == null) 
@@ -1024,6 +1031,43 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    
 			return taxonMatrix;
 	    }
+	}
+
+	private Value constructMatrixReviewValueFromCompleteValue(
+			edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue) {
+	
+		Value value = new Value(aValue.getValue());
+		value.setModifier(aValue.getModifier());
+		value.setConstraint(aValue.getConstraint());
+		value.setConstraintId(aValue.getConstraintId());
+		value.setNegation(aValue.getNegation());
+		value.setType(aValue.getType());
+		value.setCharType(aValue.getCharType());
+		value.setFrom(aValue.getFrom());
+		value.setFromInclusive(aValue.getFromInclusive());
+		value.setFromUnit(aValue.getFromUnit());
+		value.setFromModifier(aValue.getFromModifier());
+		value.setGeographicalConstraint(aValue.getGeographicalConstraint());
+		value.setInBrackets(aValue.getInBrackets());
+		value.setOrganConstraint(aValue.getOrganConstraint());
+		value.setOtherConstraint(aValue.getOtherConstraint());
+		value.setParallelismConstraint(aValue.getParallelismConstraint());
+		value.setTaxonConstraint(aValue.getTaxonConstraint());
+		value.setTo(aValue.getTo());
+		value.setToInclusive(aValue.getToInclusive());
+		value.setToUnit(aValue.getToUnit());
+		value.setToModifier(aValue.getToModifier());
+		value.setUpperRestricted(aValue.getUpperRestricted());
+		value.setUnit(aValue.getUnit());
+		value.setOntologyId(aValue.getOntologyId());
+		value.setProvenance(aValue.getProvenance());
+		value.setNotes(aValue.getNotes());
+		value.setValueOriginal(aValue.getValueOriginal());
+		value.setEstablishmentMeans(aValue.getEstablishmentMeans());
+		value.setSrc(aValue.getSrc());
+		value.setIsModifier(aValue.getIsModifier());
+
+		return value;
 	}
 
 	private String getMorphologyDescription(File file) throws JDOMException, IOException {

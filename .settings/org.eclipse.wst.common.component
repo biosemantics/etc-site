@@ -4,9 +4,6 @@
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
-        <dependent-module archiveName="semantic-markup-0.1.196-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/charaparser/charaparser">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <dependent-module archiveName="matrix-generation-0.1.62-SNAPSHOT.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/matrix-generation/matrix-generation">
             <dependency-type>uses</dependency-type>
         </dependent-module>
