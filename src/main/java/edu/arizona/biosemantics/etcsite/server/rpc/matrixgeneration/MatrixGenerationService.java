@@ -265,7 +265,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 				throw new MatrixGenerationException(task);
 			}
 			System.out.println(config.getTaxonGroup().getName()+"]]]]");
-			if(config.getTaxonGroup().getName().equals("Bacteria")){
+			if(config.getTaxonGroup().getName().equals("Prokaryotes")){
 				doMatrixGeneration(token, task, config, config.getInput());
 			}else{
 				if(isEnhanceAndMatrixGeneration(config.getInputTermReview(), config.getInputOntology())) {
@@ -322,8 +322,16 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		
 		
 		final String enhanceDir = this.getTempDir(task) + File.separator + "enhance";
-		final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
-		//Don't use this final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		//final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		//Don't use InJvm this because of owlapi dependency problem
+		final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		log(LogLevel.DEBUG, "enhance input = "+input);
+		log(LogLevel.DEBUG, "enhanceDir= "+enhanceDir);
+		log(LogLevel.DEBUG, "ontologyFile = "+ontologyFile);
+		log(LogLevel.DEBUG, "categoryTerm = "+categoryTerm);
+		log(LogLevel.DEBUG, "synonym = "+synonym);
+		log(LogLevel.DEBUG, "taxonGroup = "+taxonGroup);
+
 		
 		activeEnhanceProcess.put(config.getConfiguration().getId(), enhance);
 		final ListenableFuture<Void> futureResult = executorService.submit(enhance);
@@ -488,7 +496,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 
 		Model model = new Model();
 		try {
-			//matrix = createTaxonMatrix(outputFile, model, config.getTaxonGroup().getName().equals("Bacteria"));//!
+			//matrix = createTaxonMatrix(outputFile, model, config.getTaxonGroup().getName().equals("Prokaryotes"));//!
 			matrix = createTaxonMatrix(outputFile, model, true);//!
 		} catch (IOException | JDOMException | ClassNotFoundException e) {
 			log(LogLevel.ERROR, "Couldn't create taxon matrix from generated output", e);
@@ -1036,7 +1044,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 	private Value constructMatrixReviewValueFromCompleteValue(
 			edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue) {
 	
-		Value value = new Value(aValue.getValue());
+		Value value = new Value(aValue.getValue()); //check this: value attribute or the text value in a matrix cell?
 		value.setModifier(aValue.getModifier());
 		value.setConstraint(aValue.getConstraint());
 		value.setConstraintId(aValue.getConstraintId());

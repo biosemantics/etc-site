@@ -147,8 +147,8 @@ public class ExtraJvmEnhance extends ExtraJvmCallable<Void> implements Enhance {
 	/**/
 	public static void main(String[] args) throws Exception {
 		//MatrixGeneration mg = new MatrixGeneration("C:/test/users/1070/input_2", "C:/test/temp/matrixGeneration/124/Matrix.mx");
-		ExtraJvmEnhance mg = new ExtraJvmEnhance("C:/etcsitebase/etcsite/data/users/4/smicropie_demo_output_by_TC_task_micropiedemo", "C:/test/Test_mmm.mx", "",
-				"", "", "BACTERIA");
+		ExtraJvmEnhance mg = new ExtraJvmEnhance("C:/Users/hongcui/Documents/etcsite/data/users/1/TestMGValue_output_by_TC_task_TestMGValue1", 
+				"C:Users/hongcui/Documents/etcsite/data/matrixGeneration/40/enhance", "", "", "", "PLANT");
 		mg.call();
 		
 	}

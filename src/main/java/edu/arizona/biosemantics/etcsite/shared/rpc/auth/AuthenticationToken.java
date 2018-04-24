@@ -1,8 +1,9 @@
 package edu.arizona.biosemantics.etcsite.shared.rpc.auth;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class AuthenticationToken implements Serializable {
+public class AuthenticationToken implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = 5502478871541626972L;
 	protected int userId;

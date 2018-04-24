@@ -62,7 +62,7 @@ public class InJvmEnhance implements Enhance {
 	public static void main(String[] args) throws Exception {
 		//MatrixGeneration mg = new MatrixGeneration("C:/test/users/1070/input_2", "C:/test/temp/matrixGeneration/124/Matrix.mx");
 		InJvmEnhance mg = new InJvmEnhance("C:/etcsitebase/etcsite/data/users/4/smicropie_demo_output_by_TC_task_micropiedemo", "C:/test/Test_mmm.mx", "",
-				"", "", "BACTERIA");
+				"", "", "PROKARYOTES");
 		mg.call();
 		
 	}

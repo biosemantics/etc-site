@@ -73,7 +73,7 @@ public class SemanticMarkupOutputPresenter implements ISemanticMarkupOutputView.
 						//not yet created a dataset for this task on OTO
 						//a charaparser parse and not micropie
 						view.setEnabledSendToOto(!configuration.isOtoCreatedDataset() && hasLinkedOTOAccount && 
-								!configuration.getTaxonGroup().getName().equalsIgnoreCase("Bacteria"));
+								!configuration.getTaxonGroup().getName().equalsIgnoreCase("Prokaryotes"));
 						SemanticMarkupOutputPresenter.this.task = task;
 						Alerter.stopLoading(box);
 					}

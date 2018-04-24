@@ -59,7 +59,7 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
                 	SemanticMarkupConfiguration config = (SemanticMarkupConfiguration)task.getConfiguration();
                 	TaskStageEnum nextStage = TaskStageEnum.LEARN_TERMS;
             		Place nextPlace = new SemanticMarkupParsePlace(task);
-                	if(config.getTaxonGroup().getName().equals("Bacteria")) {
+                	if(config.getTaxonGroup().getName().equals("Prokaryotes")) {
                 		nextStage = TaskStageEnum.PARSE_TEXT;
                 		nextPlace = new SemanticMarkupParsePlace(task);
                 	}
@@ -127,7 +127,7 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 				SemanticMarkupConfiguration config = (SemanticMarkupConfiguration)task.getConfiguration();
             	TaskStageEnum nextStage = TaskStageEnum.LEARN_TERMS;
         		Place nextPlace = new SemanticMarkupParsePlace(task);
-            	if(config.getTaxonGroup().getName().equals("Bacteria")) {
+            	if(config.getTaxonGroup().getName().equals("Prokaryotes")) {
             		nextStage = TaskStageEnum.PARSE_TEXT;
             		nextPlace = new SemanticMarkupParsePlace(task);
             	}

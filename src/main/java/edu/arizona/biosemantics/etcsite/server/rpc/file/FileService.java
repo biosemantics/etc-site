@@ -1036,11 +1036,11 @@ public class FileService extends RemoteServiceServlet implements IFileService {
 		return null;
 	}
 
-	//returns the first possiblity it can find
+	//returns the first possibility it can find
 	@Override
 	public FileTreeItem getOntologyInputFileFromTextCaptureOutput(AuthenticationToken token, String textCaptureOutput) {
 		File file = new File(textCaptureOutput);
-		String prefix = file.getName() + "_output_by_OB_task_";
+		String prefix = file.getName() + "_output_by_OB_task_"; //Thomas question
 		String ontologyPath = null;
 		if(file.exists() && file.isDirectory()) {
 			for(File sibling : file.getParentFile().listFiles()) {
@@ -1050,6 +1050,8 @@ public class FileService extends RemoteServiceServlet implements IFileService {
 				}
 			}
 		}
+		
+		if(ontologyPath==null) return null;
 		
 		File ontologyFile = new File(ontologyPath);
 		if(ontologyFile.exists() && ontologyFile.isDirectory()) {

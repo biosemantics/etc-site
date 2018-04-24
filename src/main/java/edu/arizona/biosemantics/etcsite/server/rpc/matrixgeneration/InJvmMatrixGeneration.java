@@ -82,7 +82,7 @@ public class InJvmMatrixGeneration implements MatrixGeneration {
 
 	public static void main(String[] args) throws Exception {
 		//MatrixGeneration mg = new MatrixGeneration("C:/test/users/1070/input_2", "C:/test/temp/matrixGeneration/124/Matrix.mx");
-		InJvmMatrixGeneration mg = new InJvmMatrixGeneration("C:\\etcsitebase\\etcsite\\data\\users\\4\\test_mg", "BACTERIA", "C:/micropie/outputser/Matrix.mx", true, true, true);
+		InJvmMatrixGeneration mg = new InJvmMatrixGeneration("C:\\etcsitebase\\etcsite\\data\\users\\4\\test_mg", "PROKARYOTES", "C:/micropie/outputser/Matrix.mx", true, true, true);
 		mg.call();
 		
 	}
