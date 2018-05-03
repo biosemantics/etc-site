@@ -1037,6 +1037,7 @@ public class FileService extends RemoteServiceServlet implements IFileService {
 	}
 
 	//returns the first possibility it can find
+	//to populate ontology field in the matrix-generation task: use the textCaptureOutput file name to find ontology building task output.
 	@Override
 	public FileTreeItem getOntologyInputFileFromTextCaptureOutput(AuthenticationToken token, String textCaptureOutput) {
 		File file = new File(textCaptureOutput);

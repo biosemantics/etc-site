@@ -3,8 +3,8 @@ package edu.arizona.biosemantics.etcsite.shared.model.file;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-
-public class Tree<T> implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class Tree<T> implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = -2304971463737997444L;
 	private T value;

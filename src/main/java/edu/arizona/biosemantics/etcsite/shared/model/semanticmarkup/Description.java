@@ -1,8 +1,9 @@
 package edu.arizona.biosemantics.etcsite.shared.model.semanticmarkup;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class Description implements Serializable {
+public class Description implements Serializable, IsSerializable {
 
 	private String content;
 	private String type;

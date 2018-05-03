@@ -3,8 +3,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-
-public class TaxonomyComparisonConfiguration extends AbstractTaskConfiguration implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class TaxonomyComparisonConfiguration extends AbstractTaskConfiguration implements Serializable, IsSerializable {
 
 	private TaxonGroup taxonGroup;
 	private String cleanTaxInput;

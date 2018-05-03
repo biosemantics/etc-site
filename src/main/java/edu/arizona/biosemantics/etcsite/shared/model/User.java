@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-public class User implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class User implements Serializable, IsSerializable {
 
 	public static enum EmailPreference {
 		TEXT_CAPTURE, MATRIX_GENERATION, TREE_GENERATION, TAXONOMY_COMPARISON, VISUALIZATION, PIPELINE;

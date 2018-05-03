@@ -3,9 +3,9 @@ package edu.arizona.biosemantics.etcsite.shared.rpc.auth;
 import java.io.Serializable;
 
 import edu.arizona.biosemantics.etcsite.shared.model.ShortUser;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-
-public class AuthenticationResult implements Serializable {
+public class AuthenticationResult implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = -3162151093040677272L;
 	private boolean result;

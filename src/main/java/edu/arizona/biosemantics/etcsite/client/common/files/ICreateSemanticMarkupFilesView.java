@@ -15,7 +15,7 @@ public interface ICreateSemanticMarkupFilesView extends IsWidget {
 
 		ICreateSemanticMarkupFilesView getView();
 
-		void onCreate();
+		void onCreate(boolean requireAuthorityDate, boolean isProkaryote);
 
 		void setDestinationFilePath(String destinationFilePath);
 		
@@ -32,14 +32,24 @@ public interface ICreateSemanticMarkupFilesView extends IsWidget {
 	void setPresenter(ICreateSemanticMarkupFilesView.Presenter presenter);
 
 	String getAuthor();
+	
+	String getPAuthor();
 
 	String getYear();
+	
+	String getPYear();
 
 	String getTitleText();
+	
+	String getPTitleText();
 
 	List<TaxonIdentificationEntry> getTaxonIdentificationEntries();
 	
+	List<TaxonIdentificationEntry> getPTaxonIdentificationEntries();
+	
 	List<DescriptionEntry> getDescriptionsList();
+	
+	String getPDescription();
 	
 	String getStrainNumber(); 
 	
@@ -50,12 +60,20 @@ public interface ICreateSemanticMarkupFilesView extends IsWidget {
 	String getStrainGenomeAccession();
 	
 	String getAlternativeTaxonomy();
+	
+	String getPAlternativeTaxonomy();
 
 	void removeAddtionalTaxonRanks();
+	
+	void removePAddtionalTaxonRanks();
 
 	String getDOI();
+	
+	String getPDOI();
 
 	String getFullCitation();
+	
+	String getPFullCitation();
 
 	void updateProgress(double value);
 
@@ -66,11 +84,15 @@ public interface ICreateSemanticMarkupFilesView extends IsWidget {
 	boolean isCopyCheckBox();
 
 	void resetDescriptions();
+	
+	void resetPDescriptions();
 
 	void setPreviewText(String text);
 
 	void clearBatchText();
 
 	void resetStrain();
+
+
 	
 }

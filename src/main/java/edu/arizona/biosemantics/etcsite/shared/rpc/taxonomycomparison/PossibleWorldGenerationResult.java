@@ -3,8 +3,8 @@ package edu.arizona.biosemantics.etcsite.shared.rpc.taxonomycomparison;
 import java.io.Serializable;
 
 import edu.arizona.biosemantics.euler.alignment.shared.model.RunOutput;
-
-public class PossibleWorldGenerationResult implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class PossibleWorldGenerationResult implements Serializable, IsSerializable {
 
 	private RunOutput runOutput;
 	private boolean tooLong = false;

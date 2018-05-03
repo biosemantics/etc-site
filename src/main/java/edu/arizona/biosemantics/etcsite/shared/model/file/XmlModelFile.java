@@ -1,8 +1,8 @@
 package edu.arizona.biosemantics.etcsite.shared.model.file;
 
 import java.io.Serializable;
-
-public class XmlModelFile implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class XmlModelFile implements Serializable, IsSerializable {
 
 	private String fileName;
 	private String xml;

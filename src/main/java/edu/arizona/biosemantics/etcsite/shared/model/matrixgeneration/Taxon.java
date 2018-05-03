@@ -1,10 +1,11 @@
 package edu.arizona.biosemantics.etcsite.shared.model.matrixgeneration;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Taxon implements Serializable {
+public class Taxon implements Serializable, IsSerializable {
 
 	private String name;
 	private Map<String, String> characters = new HashMap<String, String>();

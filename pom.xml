@@ -23,6 +23,19 @@
 		<aspectj.version>1.8.10</aspectj.version>
 	</properties>
 	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.google.gwt</groupId>
+				<artifactId>gwt</artifactId>
+<!-- 				<version>${gwt.version}</version> -->
+				<version>2.8.0</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
 	<profiles>
 		<profile>
  			<id>java8-doclint-disabled</id>
@@ -142,17 +155,17 @@
 		<dependency>
 			<groupId>com.google.inject</groupId>
 			<artifactId>guice</artifactId>
-			<version>4.0</version>
+			<version>4.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-assistedinject</artifactId>
-			<version>4.0</version>
+			<version>4.2.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.inject.extensions</groupId>
 			<artifactId>guice-servlet</artifactId>
-			<version>4.0</version>
+			<version>4.2.0</version>
 		</dependency>
 		
 		<dependency>
@@ -161,11 +174,15 @@
 			<version>2.1.2</version>
 		</dependency>
 		
-		<dependency>
-			<groupId>com.jolbox</groupId>
-			<artifactId>bonecp</artifactId>
-			<version>0.8.0.RELEASE</version>
-		</dependency>
+		
+<!-- 		https://mvnrepository.com/artifact/com.zaxxer/HikariCP -->
+<!-- 		<dependency> -->
+<!-- 		    <groupId>com.zaxxer</groupId> -->
+<!-- 		    <artifactId>HikariCP</artifactId> -->
+<!-- 		    <version>3.1.0</version> -->
+<!-- 		</dependency> -->
+
+				
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
@@ -225,6 +242,13 @@
 			<artifactId>guava-gwt</artifactId>
 			<version>22.0</version>
 		</dependency>
+		
+		<dependency> 
+			<groupId>com.jolbox</groupId>
+			<artifactId>bonecp</artifactId>
+			<version>0.8.0.RELEASE</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-incubator</artifactId>
@@ -254,7 +278,7 @@
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.semanticmarkup</groupId>
 		  <artifactId>enhance</artifactId>
-		  <version>0.0.25-SNAPSHOT</version>
+		  <version>0.0.26-SNAPSHOT</version>
 		  <exclusions>
 		  	<exclusion>
 		  		<artifactId>owlapi-tools</artifactId>
@@ -446,39 +470,68 @@
 		  	</exclusion>
 		  </exclusions>
 		</dependency>
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.codehaus.jackson</groupId> -->
+<!-- 			<artifactId>jackson-core-asl</artifactId> -->
+<!-- 			<version>1.9.13</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.codehaus.jackson</groupId> -->
+<!-- 			<artifactId>jackson-mapper-asl</artifactId> -->
+<!-- 			<version>1.9.13</version> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.codehaus.jackson</groupId> -->
+<!-- 			<artifactId>jackson-core-asl</artifactId> -->
+<!-- 			<version>1.9.13</version> -->
+<!-- 			<classifier>sources</classifier> -->
+<!-- 		</dependency> -->
+<!-- 		<dependency> -->
+<!-- 			<groupId>org.codehaus.jackson</groupId> -->
+<!-- 			<artifactId>jackson-mapper-asl</artifactId> -->
+<!-- 			<version>1.9.13</version> -->
+<!-- 			<classifier>sources</classifier> -->
+<!-- 		</dependency> -->
 		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>1.9.13</version>
-			<classifier>sources</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>1.9.13</version>
-			<classifier>sources</classifier>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-core</artifactId>
+		    <version>2.8.5</version>
+<!-- 		    <version>2.5.1</version> -->
 		</dependency>
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-core</artifactId>
-		    <version>2.5.1</version>
-		</dependency>
-		<dependency>
-		    <groupId>com.fasterxml.jackson.core</groupId>
-		    <artifactId>jackson-core</artifactId>
-		    <version>2.5.1</version>
+		    <version>2.8.5</version>
+<!-- 		    <version>2.5.1</version> -->
 		    <classifier>sources</classifier>
 		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.5</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<version>2.8.5</version>
+			<classifier>sources</classifier>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.8.5</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.fasterxml.jackson.core</groupId>
+		    <artifactId>jackson-annotations</artifactId>
+		    <version>2.8.5</version>
+		    <classifier>sources</classifier>
+		</dependency>
+		
 		<dependency>
 			<groupId>edu.arizona.biosemantics.common</groupId>
 			<artifactId>log</artifactId>
@@ -493,12 +546,12 @@
 		<dependency>
 			<groupId>edu.arizona.biosemantics.common</groupId>
 			<artifactId>taxonomy</artifactId>
-			<version>0.0.25-SNAPSHOT</version>
+			<version>0.0.26-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.arizona.biosemantics.common</groupId>
 			<artifactId>taxonomy</artifactId>
-			<version>0.0.25-SNAPSHOT</version>
+			<version>0.0.26-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<!-- Needed For JavaEnvUtils.getJreExecutable(), even if removed no errors are displayed -->
@@ -594,7 +647,7 @@
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.micropie</groupId>
 		  <artifactId>micropie</artifactId>
-		  <version>0.1.7-SNAPSHOT</version>
+		  <version>0.1.9-SNAPSHOT</version>
 		  <exclusions>
 		  	<exclusion>
 		  		<artifactId>stanford-corenlp</artifactId>
@@ -623,7 +676,7 @@
 		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
 
 		<plugins>
-			<!-- GWT Maven Plugin -->
+			<!-- Mojo's Maven GWT Plugin -->
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>gwt-maven-plugin</artifactId>
@@ -639,9 +692,14 @@
 	                    <artifactId>gwt-dev</artifactId>
 	                    <version>${gwtVersion}</version>
 	                </dependency>
-	                <dependency>
+<!-- 	                <dependency> -->
+<!-- 	                    <groupId>com.google.gwt</groupId> -->
+<!-- 	                    <artifactId>gwt-servlet</artifactId> -->
+<!-- 	                    <version>${gwtVersion}</version> -->
+<!-- 	                </dependency> -->
+					<dependency>
 	                    <groupId>com.google.gwt</groupId>
-	                    <artifactId>gwt-servlet</artifactId>
+	                    <artifactId>gwt-codeserver</artifactId>
 	                    <version>${gwtVersion}</version>
 	                </dependency>
                 </dependencies>

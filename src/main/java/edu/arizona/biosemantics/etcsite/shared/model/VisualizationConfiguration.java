@@ -2,8 +2,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
 import java.util.List;
-
-public class VisualizationConfiguration extends AbstractTaskConfiguration implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class VisualizationConfiguration extends AbstractTaskConfiguration implements Serializable, IsSerializable {
 
 	/**
 	 * 

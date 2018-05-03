@@ -1,9 +1,10 @@
 package edu.arizona.biosemantics.etcsite.shared.model.semanticmarkup;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.Map;
 
-public class PreprocessedDescription implements Serializable {
+public class PreprocessedDescription implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = -3004957797166336806L;
 	private String fileName;

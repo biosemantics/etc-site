@@ -2,8 +2,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-public class Configuration implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class Configuration implements Serializable, IsSerializable {
 	
 	private static final long serialVersionUID = -3601068865826034113L;
 	private int id;

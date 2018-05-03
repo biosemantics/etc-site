@@ -2,8 +2,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-public class TaxonGroup implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class TaxonGroup implements Serializable, IsSerializable {
 
 	/**
 	 * 

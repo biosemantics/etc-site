@@ -22,6 +22,11 @@
 			height: 60px;
 			width: 550px;
 		}
+		
+		.prokaryoteDescriptionArea{
+			height: 400px;
+			width: 720px;
+		}
 		.batchArea {
 			height: 400px;
 			width: 720px;
@@ -53,7 +58,7 @@
 			color: DimGray;
 		}
 		.radioPadding{
-		padding: 8px;
+			padding: 8px;
 	    }
 		</ui:style>
 		<ui:with type="com.sencha.gxt.core.client.util.Margins" field="margins5">
@@ -164,6 +169,7 @@
 									</g:row>
 								</g:Grid> 
 							</g:VerticalPanel>
+							<!-- 
 							<g:Label styleName="{style.sub-heading}">Strain Information (For microbes only)</g:Label>
 							<g:RadioButton ui:field="createStrainRadio" name="createStrainInformation" styleName="{style.radioPadding}">Input strain information </g:RadioButton>
 							<g:VerticalPanel ui:field="strainPanel" visible="false">
@@ -202,7 +208,7 @@
 									</g:row>
 								</g:Grid>
 							</g:VerticalPanel>
-							
+							 -->
 						    <g:VerticalPanel>
 						        <g:Label styleName="{style.sub-heading}"> Previous or New Taxonomic Names</g:Label>
 						        <g:Grid>
@@ -265,6 +271,175 @@
 				</g:VerticalPanel>
 			</g:ScrollPanel>
 	    </g:Tab>
+	    
+	    <g:Tab text="Prokaryote Single-File Creation ">
+	        <g:ScrollPanel styleName="{style.scrollPanel}">
+				<g:VerticalPanel>
+					<g:VerticalPanel>
+						<g:Label styleName="{style.heading}">INSTRUCTIONS</g:Label>
+						<g:HTML styleName="{style.instruction}">You can create 
+					   	the input file for one Prokaryote treatment to input into the Text Capture tool. 
+					   	Create multiple files by repeatedly submitting the form, or use 
+					   	the "Batch Creation" tab. The file created will have the name consisting of the last name of the first author, year, and taxon name. 
+						<br/>
+						(*) marks required fields.</g:HTML>
+					</g:VerticalPanel>
+					
+					<g:VerticalPanel>
+						<g:Label styleName="{style.heading}">CREATE FILE</g:Label>
+						<g:VerticalPanel>
+							<g:VerticalPanel>
+								<g:Label styleName="{style.sub-heading}">Source Document Information *</g:Label>
+								<g:Grid ui:field="PdocInfoGrid">
+								    <g:row>
+								        <g:customCell>
+											<g:Label>Author *</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="Pauthor"></g:TextBox>
+										</g:customCell>
+									</g:row>
+									<g:row>
+									    <g:customCell>
+											<g:Label>Publication Year *</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="Pyear"></g:TextBox>
+										</g:customCell>
+									</g:row>
+									<g:row>
+								    	<g:customCell>
+											<g:Label>Title *</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="Ptitle"></g:TextBox>
+										</g:customCell>
+									</g:row>
+									<g:row>
+									    <g:customCell>
+											<g:Label>DOI</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="Pdoi"></g:TextBox>
+										</g:customCell>
+									</g:row>
+									<g:row>
+									    <g:customCell>
+											<g:Label>Full Citation</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="PfullCitation"></g:TextBox>
+										</g:customCell>
+									</g:row>
+								</g:Grid>
+							</g:VerticalPanel>
+							<g:VerticalPanel>
+								<g:Label styleName="{style.sub-heading}">Taxon Name Information * (Ranks must be in the order of high to low, use the token "unspecified" if the authority or the date can not be provided.)</g:Label>
+								<g:Grid ui:field="PranksGrid">
+									<g:row>
+										<g:cell>Rank*</g:cell>
+										<g:cell>Name*</g:cell>
+									</g:row> 
+									<g:row>
+										<g:customCell>
+											<form:ComboBox ui:field="PranksCombo" />
+											<!-- <g:SuggestBox ui:field="ranksCombo"></g:SuggestBox> -->
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox ui:field="PrankNameField" />
+										</g:customCell>
+										<!--<g:customCell>
+										    <g:Button ui:field="authorityDateButton" visible="false">Use last used Authority and Date</g:Button>
+										</g:customCell> -->
+                                         <g:customCell>
+											<g:Button ui:field="PdeleteRankButton" visible="false"/>
+										</g:customCell>
+									</g:row>
+									<g:row>
+										<g:customCell>
+											<g:Button ui:field="PaddRankButton">Add rank</g:Button>
+										</g:customCell>
+										<g:cell></g:cell>
+									</g:row>
+								</g:Grid> 
+							</g:VerticalPanel>
+							<g:Label styleName="{style.sub-heading}">Strain Information (For microbes only)</g:Label>
+							<g:RadioButton ui:field="createStrainRadio" name="createStrainInformation" styleName="{style.radioPadding}">Input strain information </g:RadioButton>
+							<g:VerticalPanel ui:field="strainPanel" visible="false">
+								<g:Grid>
+								    <g:row>
+									    <g:customCell>
+											<g:Label>Strain Number *</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="strainNumber"></g:TextBox>
+										</g:customCell>
+									</g:row>
+									<g:row>
+									    <g:customCell>
+											<g:Label>Equivalent Strain Numbers in Other Collections</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="equivalStrain"></g:TextBox>
+										</g:customCell>
+									</g:row>
+									<g:row>
+									    <g:customCell>
+											<g:Label>Genbank 16S accession number</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="strainAccession"></g:TextBox>
+										</g:customCell>
+									</g:row>
+									<g:row>
+									    <g:customCell>
+											<g:Label>Genome sequence accession number</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="strainGenomeAccession"></g:TextBox>
+										</g:customCell>
+									</g:row>
+								</g:Grid>
+							</g:VerticalPanel>
+							
+						    <g:VerticalPanel>
+						        <g:Label styleName="{style.sub-heading}"> Previous or New Taxonomic Names</g:Label>
+						        <g:Grid>
+						              <g:row>
+								        <g:customCell>
+											<g:Label>Previous or new taxonomic names&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</g:Label>
+										</g:customCell>
+										<g:customCell>
+											<g:TextBox visibleLength="45" ui:field="PalternativeTaxonomy"></g:TextBox>
+										</g:customCell>
+									</g:row>
+						        </g:Grid>
+						    </g:VerticalPanel>	 
+							
+							<g:VerticalPanel>
+								<g:Label styleName="{style.sub-heading}">Description</g:Label>
+<!-- 								<g:FlowPanel> -->
+									<g:Label>If copy/paste from another source, check word by word
+										(especially special symbols) that the content is copied correctly.</g:Label>
+									<g:Label>Do not include any HTML or XML tag in the text.</g:Label>
+									<g:Grid>
+										<g:row>
+									    	 <g:customCell>
+											<!-- style doesn't work, set size in view.java -->
+								            <form:TextArea ui:field="PdescriptionArea" styleName="{style.prokaryoteDescriptionArea}"></form:TextArea>
+										
+											</g:customCell>
+										</g:row>
+									</g:Grid>
+<!-- 								</g:FlowPanel> -->
+							</g:VerticalPanel>
+							<g:Button ui:field="PcreateButton">Create</g:Button>
+						</g:VerticalPanel>
+					</g:VerticalPanel>
+				</g:VerticalPanel>
+			</g:ScrollPanel>
+	    </g:Tab>
+	    
 	    <g:Tab text="Batch Creation">
 	        <g:ScrollPanel>
 	            <g:VerticalPanel>
@@ -472,3 +647,5 @@
 	    </g:Tab>
 	</g:TabPanel>
 </ui:UiBinder> 
+
+

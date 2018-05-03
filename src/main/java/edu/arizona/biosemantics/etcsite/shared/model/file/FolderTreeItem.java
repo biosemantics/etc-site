@@ -1,7 +1,7 @@
 package edu.arizona.biosemantics.etcsite.shared.model.file;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-
-public class FolderTreeItem extends FileTreeItem {
+public class FolderTreeItem extends FileTreeItem implements IsSerializable{
 	
 	public FolderTreeItem() {
 		

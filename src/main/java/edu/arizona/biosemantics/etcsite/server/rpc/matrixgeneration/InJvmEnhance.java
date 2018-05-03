@@ -1,6 +1,8 @@
 package edu.arizona.biosemantics.etcsite.server.rpc.matrixgeneration;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -35,13 +37,14 @@ public class InJvmEnhance implements Enhance {
 	@Override
 	public Void call() throws MatrixGenerationException {
 		try {
-			EnhanceRun enhance = new EnhanceRun(inputDir, outputDir, inputOntology, 
+			List<String> knowsFilePaths = (List<String>) Arrays.asList(inputOntology.split("#"));
+			EnhanceRun enhance = new EnhanceRun(inputDir, outputDir, knowsFilePaths, 
 					termReviewTermCategorization, termReviewSynonyms, TaxonGroup.valueOf(taxonGroup));
 			enhance.run();
 			
 			executedSuccessfully = true;
 		} catch(Throwable e) {
-			log(LogLevel.ERROR, "Matrix generation failed with exception.", e);
+			log(LogLevel.ERROR, "Matrix generation:enhance failed with exception.", e);
 			executedSuccessfully = false;
 		}
 		if(!isExecutedSuccessfully()) {

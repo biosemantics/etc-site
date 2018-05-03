@@ -1,8 +1,8 @@
 package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
-
-public class Setup implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class Setup implements Serializable, IsSerializable {
 	
 	private String seperator;
 	private String fileBase;

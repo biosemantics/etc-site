@@ -202,9 +202,88 @@ public class CreateSemanticMarkupFilesPresenter implements ICreateSemanticMarkup
 		this.fileFormatService = fileFormatService;
 	}
 
-	public void onCreate() {
+	public void onCreate(boolean requireAuthorityDate, boolean isProkaryotes) {
 		view.showProgress();
-		createModelFile();
+		if(isProkaryotes){
+			createModelFile4Prokaryotes();
+		}else{
+			createModelFile();
+		}
+	}
+	
+	private boolean createModelFile4Prokaryotes() {
+		boolean createrank = false;
+		StringBuilder textBuilder = new StringBuilder();
+		textBuilder.append("author: " + shortenAuthor(view.getPAuthor().trim()) + "\n");
+		textBuilder.append("year: " + (view.getPYear().trim()) + "\n");
+		textBuilder.append("title: " + (view.getPTitleText().trim()) + "\n");
+		textBuilder.append("doi: " + (view.getPDOI().trim())  + "\n");
+		textBuilder.append("full citation: " + (view.getPFullCitation().trim()) + "\n");
+		List<TaxonIdentificationEntry> taxonIdentificationEntries = view.getPTaxonIdentificationEntries();
+	
+		for(TaxonIdentificationEntry taxonIdentificationEntry : taxonIdentificationEntries) {
+			Rank rank = taxonIdentificationEntry.getRank();
+			String name = taxonIdentificationEntry.getValue().trim();
+			if(rank != null && !name.isEmpty()){
+				if(! name.contains(",") && !name.contains(" ")){
+					name = name + " unspecified,unspecified";
+				}
+				textBuilder.append(rank + " name: " + name + "\n");
+				createrank = true;
+			}
+		}
+		textBuilder.append("strain number: " + view.getStrainNumber().trim() + "\n");
+		textBuilder.append("equivalent strain numbers: " + view.getEqStrainNumbers().trim() + "\n");
+		textBuilder.append("accession number 16s rrna: " + view.getStrainAccession().trim() + "\n");
+		textBuilder.append("accession number genome sequence: " + view.getStrainGenomeAccession().trim() + "\n");
+		textBuilder.append("previous or new taxonomic names: " + view.getPAlternativeTaxonomy().trim() + "\n");
+		if(!createrank&&view.getStrainNumber().trim().isEmpty()) {
+			Alerter.inputError("Please input at least one taxon name or one strain number in the treatment!");
+			view.hideProgress();
+			return false;
+		}
+		
+		if (view.getPDescription().trim().length()==0){
+			Alerter.inputError("Please input description!");
+			view.hideProgress();
+			return false;
+		}else{
+			textBuilder.append("morphology: #" + view.getPDescription().trim() + "#\n");
+		}
+				
+		fileFormatService.createTaxonDescriptionFile(Authentication.getInstance().getToken(), textBuilder.toString(), 
+				new AsyncCallback<List<XmlModelFile>>() {
+			@Override
+			public void onSuccess(List<XmlModelFile> modelFiles) {
+				StringBuilder overallError = new StringBuilder();
+				
+				for(XmlModelFile xmlModelFile : modelFiles) {
+					if(xmlModelFile.hasError())
+						overallError.append(xmlModelFile.getError() + "\n\n");
+				}
+				
+				String error = overallError.toString();
+				if(error.isEmpty()){
+					System.out.println(destinationFilePath);
+					createXmlFiles(modelFiles, destinationFilePath);
+					view.removePAddtionalTaxonRanks();
+					view.resetPDescriptions();
+					view.resetStrain();
+				}else {
+					error += "Did not create any files! Please try again!";
+					Alerter.inputError(error.replaceAll("\n", "</br>"));
+					view.hideProgress();
+				}
+			}
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Alerter.failedToCreateTaxonDescription(caught);
+				view.hideProgress();
+			}
+		});
+		
+		return true;
 	}
 	
 	private boolean createModelFile() {
@@ -212,11 +291,12 @@ public class CreateSemanticMarkupFilesPresenter implements ICreateSemanticMarkup
 		boolean createdescription = false;
 		StringBuilder textBuilder = new StringBuilder();
 		textBuilder.append("author: " + shortenAuthor(view.getAuthor().trim()) + "\n");
-		textBuilder.append("year: " + view.getYear().trim() + "\n");
-		textBuilder.append("title: " + view.getTitleText().trim() + "\n");
-		textBuilder.append("doi: " + view.getDOI().trim() + "\n");
-		textBuilder.append("full citation: " + view.getFullCitation().trim() + "\n");
+		textBuilder.append("year: " + (view.getYear().trim()) + "\n");
+		textBuilder.append("title: " + (view.getTitleText().trim()) + "\n");
+		textBuilder.append("doi: " + (view.getDOI().trim())  + "\n");
+		textBuilder.append("full citation: " + (view.getFullCitation().trim()) + "\n");
 		List<TaxonIdentificationEntry> taxonIdentificationEntries = view.getTaxonIdentificationEntries();
+	
 		for(TaxonIdentificationEntry taxonIdentificationEntry : taxonIdentificationEntries) {
 			Rank rank = taxonIdentificationEntry.getRank();
 			String name = taxonIdentificationEntry.getValue().trim();
@@ -230,10 +310,10 @@ public class CreateSemanticMarkupFilesPresenter implements ICreateSemanticMarkup
 				createrank = true;
 			}
 		}
-		textBuilder.append("strain number: " + view.getStrainNumber().trim() + "\n");
-		textBuilder.append("equivalent strain numbers: " + view.getEqStrainNumbers().trim() + "\n");
-		textBuilder.append("accession number 16s rrna: " + view.getStrainAccession().trim() + "\n");
-		textBuilder.append("accession number genome sequence: " + view.getStrainGenomeAccession().trim() + "\n");
+		//textBuilder.append("strain number: " + view.getStrainNumber().trim() + "\n");
+		//textBuilder.append("equivalent strain numbers: " + view.getEqStrainNumbers().trim() + "\n");
+		//textBuilder.append("accession number 16s rrna: " + view.getStrainAccession().trim() + "\n");
+		//textBuilder.append("accession number genome sequence: " + view.getStrainGenomeAccession().trim() + "\n");
 		textBuilder.append("previous or new taxonomic names: " + view.getAlternativeTaxonomy().trim() + "\n");
 		if(!createrank&&view.getStrainNumber().trim().isEmpty()) {
 			Alerter.inputError("Please input at least one taxon name or one strain number in the treatment!");
@@ -278,7 +358,7 @@ public class CreateSemanticMarkupFilesPresenter implements ICreateSemanticMarkup
 					createXmlFiles(modelFiles, destinationFilePath);
 					view.removeAddtionalTaxonRanks();
 					view.resetDescriptions();
-					view.resetStrain();
+					//view.resetStrain();
 				}else {
 					error += "Did not create any files! Please try again!";
 					Alerter.inputError(error.replaceAll("\n", "</br>"));

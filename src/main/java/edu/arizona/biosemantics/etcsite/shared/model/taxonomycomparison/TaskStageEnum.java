@@ -1,8 +1,9 @@
 package edu.arizona.biosemantics.etcsite.shared.model.taxonomycomparison;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public enum TaskStageEnum implements Serializable {
+public enum TaskStageEnum implements Serializable, IsSerializable {
 	CREATE_INPUT("Create Input"),
     INPUT("Input"),
     ALIGN("Align"), 

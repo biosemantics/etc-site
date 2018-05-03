@@ -73,7 +73,7 @@ public class XmlModelFileCreator {
 	}
 	
 	public boolean validateName(String name) {
-		if(!name.contains(",")){
+		if(!name.contains(",") ){
 			return false;
 		}else{
 			String names[] = name.split(",");

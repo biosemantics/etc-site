@@ -2,8 +2,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-public class Captcha implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class Captcha implements Serializable, IsSerializable {
 	
 	private static final long serialVersionUID = -3601068865826034113L;
 	private String solution;

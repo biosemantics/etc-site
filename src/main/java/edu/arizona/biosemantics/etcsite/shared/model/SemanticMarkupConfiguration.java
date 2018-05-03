@@ -3,8 +3,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-
-public class SemanticMarkupConfiguration extends AbstractTaskConfiguration implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class SemanticMarkupConfiguration extends AbstractTaskConfiguration implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = -2317947666906682233L;
 	private String input;

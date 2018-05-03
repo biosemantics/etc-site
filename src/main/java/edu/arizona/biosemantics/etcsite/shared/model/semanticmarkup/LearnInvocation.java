@@ -1,8 +1,8 @@
 package edu.arizona.biosemantics.etcsite.shared.model.semanticmarkup;
 
 import java.io.Serializable;
-
-public class LearnInvocation implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class LearnInvocation implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = -897176969621825980L;
 	private String sentences;

@@ -3,8 +3,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
-
-public class ShortUser implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class ShortUser implements Serializable, IsSerializable {
 	
 	private static final long serialVersionUID = 9014388467462637993L;
 	private int id;

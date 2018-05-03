@@ -1,10 +1,11 @@
 package edu.arizona.biosemantics.etcsite.shared.model.file;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
 import edu.arizona.biosemantics.common.taxonomy.Rank;
 
-public class TaxonIdentificationEntry implements Comparable<TaxonIdentificationEntry>, Serializable {
+public class TaxonIdentificationEntry implements Comparable<TaxonIdentificationEntry>, IsSerializable, Serializable {
 
 	private Rank rank;
 	private String value;

@@ -2,8 +2,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-public class PasswordResetRequest implements Serializable{
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class PasswordResetRequest implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = -1058828266337932771L;
 	

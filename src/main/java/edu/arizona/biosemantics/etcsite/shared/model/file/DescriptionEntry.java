@@ -3,9 +3,9 @@ package edu.arizona.biosemantics.etcsite.shared.model.file;
 import java.io.Serializable;
 
 import edu.arizona.biosemantics.common.taxonomy.Description;
-
+import com.google.gwt.user.client.rpc.IsSerializable;
 @SuppressWarnings("serial")
-public class DescriptionEntry implements Serializable{
+public class DescriptionEntry implements Serializable, IsSerializable{
 
 
 	private Description type;

@@ -2,8 +2,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-public abstract class TaskStage implements Serializable, Comparable<TaskStage> {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public abstract class TaskStage implements Serializable, IsSerializable, Comparable<TaskStage> {
 
 	/**
 	 * 

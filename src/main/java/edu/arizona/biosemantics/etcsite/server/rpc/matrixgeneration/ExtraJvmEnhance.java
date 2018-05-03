@@ -1,6 +1,8 @@
 package edu.arizona.biosemantics.etcsite.server.rpc.matrixgeneration;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.concurrent.ExecutionException;
 
 import edu.arizona.biosemantics.common.biology.TaxonGroup;
@@ -43,7 +45,8 @@ public class ExtraJvmEnhance extends ExtraJvmCallable<Void> implements Enhance {
 						&& termReviewSynonyms != null && !termReviewSynonyms.isEmpty()) {
 					System.out.println("Run Enhance: \n" + inputDir + " \n" + tempDir + " \n" + inputOntology + "\n " + termReviewTermCategorization + "\n"
 							+ termReviewSynonyms + "\n" + taxonGroup );
-					EnhanceRun enhance = new EnhanceRun(inputDir, tempDir, inputOntology, 
+					ArrayList<String> knowsFilePaths = (ArrayList<String>) Arrays.asList(inputOntology.split("#"));
+					EnhanceRun enhance = new EnhanceRun(inputDir, tempDir, knowsFilePaths, 
 							termReviewTermCategorization, termReviewSynonyms, TaxonGroup.valueOf(taxonGroup));
 					enhance.run();
 					System.out.println("Done Running Minimal Enhance");
@@ -52,8 +55,7 @@ public class ExtraJvmEnhance extends ExtraJvmCallable<Void> implements Enhance {
 					MinimalEnhanceRun enhance = new MinimalEnhanceRun(inputDir, tempDir, TaxonGroup.valueOf(taxonGroup));
 					enhance.run();
 					System.out.println("Done Running Minimal Enhance");
-				}
-					
+				}			
 			} catch (Throwable t) {
 				System.out.println("ExtraJvmEnhance failed with throwable "+t.getMessage());
 				System.out.println(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(t));

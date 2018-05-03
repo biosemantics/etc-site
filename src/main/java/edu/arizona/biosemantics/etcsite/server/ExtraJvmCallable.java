@@ -157,7 +157,7 @@ public abstract class ExtraJvmCallable<T> implements Callable<T>, Task {
 				
 				exitStatus = process.waitFor();
 			} catch(IOException | InterruptedException e) {
-				log(LogLevel.ERROR, "Process couldn't execute successfully", e);
+				log(LogLevel.ERROR, "ExtraJVM process couldn't execute successfully", e);
 			}
 			
 			return createReturn();

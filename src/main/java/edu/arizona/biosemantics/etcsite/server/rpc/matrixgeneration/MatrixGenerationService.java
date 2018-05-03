@@ -35,6 +35,7 @@ import org.jdom2.input.SAXBuilder;
 import org.jdom2.xpath.XPathExpression;
 import org.jdom2.xpath.XPathFactory;
 
+
 import au.com.bytecode.opencsv.CSVWriter;
 
 import com.google.common.util.concurrent.ListenableFuture;
@@ -44,6 +45,8 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.google.inject.Inject;
 
 import edu.arizona.biosemantics.common.log.LogLevel;
+import edu.arizona.biosemantics.common.ontology.search.TaxonGroupOntology;
+import edu.arizona.biosemantics.common.ontology.search.model.Ontology;
 import edu.arizona.biosemantics.common.taxonomy.Rank;
 import edu.arizona.biosemantics.common.taxonomy.RankData;
 import edu.arizona.biosemantics.common.taxonomy.TaxonIdentification;
@@ -212,9 +215,9 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		MatrixGenerationConfiguration config = new MatrixGenerationConfiguration();
 		config.setInput(input);
 		config.setInputTermReview(inputTermReview);
-		config.setInputOntology(inputOntology);
 		TaxonGroup group = daoManager.getTaxonGroupDAO().getTaxonGroup(taxonGroup);
 		config.setTaxonGroup(group);
+		config.setInputOntology(inputOntology);
 		config.setOutput(config.getInput() + "_output_by_MG_task_" + taskName);
 		config.setInheritValues(inheritValues);
 		config.setGenerateAbsentPresent(generateAbsentPresent);
@@ -268,14 +271,14 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 			if(config.getTaxonGroup().getName().equals("Prokaryotes")){
 				doMatrixGeneration(token, task, config, config.getInput());
 			}else{
-				if(isEnhanceAndMatrixGeneration(config.getInputTermReview(), config.getInputOntology())) {
+				//if(isEnhanceAndMatrixGeneration(config.getInputTermReview(), config.getInputOntology())) {
 					//doMatrixGeneration(token, task, config, config.getInput());
-					System.out.println("doEnhanceAndMatrixGeneration");
+					//log(LogLevel.DEBUG, "doEnhanceAndMatrixGeneration");
 					doEnhanceAndMatrixGeneration(token, task, config);
-				} else {
-					System.out.println("doMinimalEnhanceAndMatrixGeneration");
-					doMinimalEnhanceAndMatrixGeneration(token, task, config, config.getInput());
-				}
+				//} else {
+				//	log(LogLevel.DEBUG, "doMinimalEnhanceAndMatrixGeneration");
+				//	doMinimalEnhanceAndMatrixGeneration(token, task, config, config.getInput());
+				//}
 			}
 			
 			return task;
@@ -290,18 +293,20 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 	private void doEnhanceAndMatrixGeneration(final AuthenticationToken token,  final Task task, final MatrixGenerationConfiguration config) throws MatrixGenerationException {
 		String input = config.getInput();
 		String inputOntology = config.getInputOntology();
-		String ontologyFile = "";
+		String ontologyFiles = "";
 		String inputTermReview = config.getInputTermReview();
 		String categoryTerm = "";
 		String synonym = "";
 		String taxonGroup = config.getTaxonGroup().getName().toUpperCase();
 		
 		try {
-			List<String> files = fileService.getDirectoriesFiles(token, inputOntology);
-			for(String file : files) {
-				if(file.endsWith(".owl") && !file.startsWith("module.") && !file.equals("ModifierOntology.owl")) {
-					ontologyFile = inputOntology + File.separator + file;
-				}	
+			if(!inputOntology.isEmpty()){
+				List<String> files = fileService.getDirectoriesFiles(token, inputOntology);
+				for(String file : files) {
+					if(file.endsWith(".owl") && !file.startsWith("module.") && !file.equals("ModifierOntology.owl")) {
+						ontologyFiles = inputOntology + File.separator + file;
+					}	
+				}
 			}
 		} catch(PermissionDeniedException e) {
 			throw new MatrixGenerationException(task);
@@ -319,20 +324,23 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		} catch(PermissionDeniedException e) {
 			throw new MatrixGenerationException(task);
 		}
+		//add default part_of csv for all taxon groups
+		String taxonOntologyPath = Configuration.charaparser_ontologies + File.separator;
 		
+		//add default entity ontology for the taxon group
+		Set<Ontology> defaultOntos = TaxonGroupOntology.getEntityOntologies(edu.arizona.biosemantics.common.biology.TaxonGroup.valueFromDisplayName(config.getTaxonGroup().getName()));
+		ontologyFiles = ontologyFiles+"#"+taxonOntologyPath + "part_of.csv";	
+		for(Ontology onto : defaultOntos){
+			ontologyFiles = ontologyFiles+"#"+taxonOntologyPath + onto.toString().toLowerCase() + ".owl";		
+		}
+	
+		ontologyFiles = ontologyFiles.replaceFirst("^#", ""); //#-separated file paths, could be empty
 		
 		final String enhanceDir = this.getTempDir(task) + File.separator + "enhance";
-		//final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		//final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFiles, categoryTerm, synonym, taxonGroup);
 		//Don't use InJvm this because of owlapi dependency problem
-		final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
-		log(LogLevel.DEBUG, "enhance input = "+input);
-		log(LogLevel.DEBUG, "enhanceDir= "+enhanceDir);
-		log(LogLevel.DEBUG, "ontologyFile = "+ontologyFile);
-		log(LogLevel.DEBUG, "categoryTerm = "+categoryTerm);
-		log(LogLevel.DEBUG, "synonym = "+synonym);
-		log(LogLevel.DEBUG, "taxonGroup = "+taxonGroup);
-
-		
+		final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFiles, categoryTerm, synonym, taxonGroup);
+	
 		activeEnhanceProcess.put(config.getConfiguration().getId(), enhance);
 		final ListenableFuture<Void> futureResult = executorService.submit(enhance);
 		this.activeProcessFutures.put(config.getConfiguration().getId(), futureResult);
@@ -379,7 +387,15 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		
 	}
 
-	private void doMinimalEnhanceAndMatrixGeneration(final AuthenticationToken token, final Task task, final MatrixGenerationConfiguration config, 
+	/**
+	 * not needed anymore
+	 * @param token
+	 * @param task
+	 * @param config
+	 * @param inputDir
+	 * @throws MatrixGenerationException
+	 */
+	/*private void doMinimalEnhanceAndMatrixGeneration(final AuthenticationToken token, final Task task, final MatrixGenerationConfiguration config, 
 			String inputDir) throws MatrixGenerationException {
 		String input = config.getInput();
 		String ontologyFile = "";
@@ -388,25 +404,26 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		String taxonGroup = config.getTaxonGroup().getName().toUpperCase();
 		
 		final String enhanceDir = this.getTempDir(task) + File.separator + "enhance";
-		final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
-		//Don't use this final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		//final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
+		//Don't use this 
+		final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFile, categoryTerm, synonym, taxonGroup);
 		activeEnhanceProcess.put(config.getConfiguration().getId(), enhance);
 		final ListenableFuture<Void> futureResult = executorService.submit(enhance);
 		this.activeProcessFutures.put(config.getConfiguration().getId(), futureResult);
 		
-		/*try {
-			futureResult.get(Configuration.matrixGeneration_maxRunningTimeMinutes, TimeUnit.MINUTES);
-		} catch (InterruptedException e2) {
-			e2.printStackTrace();
-		} catch (ExecutionException e2) {
-			e2.printStackTrace();
-		} catch (TimeoutException e2) {
-			// Task took too long. 
-			futureResult.cancel(true);
-			matrixGeneration.destroy();
-			log(LogLevel.ERROR,
-					"Matrix generation took too long and was canceled.");
-		}*/
+//		try {
+//			futureResult.get(Configuration.matrixGeneration_maxRunningTimeMinutes, TimeUnit.MINUTES);
+//		} catch (InterruptedException e2) {
+//			e2.printStackTrace();
+//		} catch (ExecutionException e2) {
+//			e2.printStackTrace();
+//		} catch (TimeoutException e2) {
+//			// Task took too long. 
+//			futureResult.cancel(true);
+//			matrixGeneration.destroy();
+//			log(LogLevel.ERROR,
+//					"Matrix generation took too long and was canceled.");
+//		}
 		
 		futureResult.addListener(new Runnable() {
 		     	public void run() {	
@@ -433,7 +450,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		     		}
 		     	}
 		     }, executorService);
-	}
+	}*/
 	
 	private void doMatrixGeneration(final AuthenticationToken token, final Task task, final MatrixGenerationConfiguration config, 
 			String inputDir) throws MatrixGenerationException {
@@ -443,10 +460,10 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		boolean generateAbsentPresent = config.isGenerateAbsentPresent();
 		//System.out.println(taxonGroup+"--"+"doMatrixGeneration");
 		//because etc-site and matrix generation uses different versions of OWLAPI, always use ExtraJvm for local and server.
-		final MatrixGeneration matrixGeneration = new ExtraJvmMatrixGeneration(inputDir, taxonGroup, 
-		outputFile, inheritValues, generateAbsentPresent, true);
-		//final MatrixGeneration matrixGeneration = new InJvmMatrixGeneration(inputDir, taxonGroup, 
+		//final MatrixGeneration matrixGeneration = new ExtraJvmMatrixGeneration(inputDir, taxonGroup, 
 		//outputFile, inheritValues, generateAbsentPresent, true);
+		final MatrixGeneration matrixGeneration = new InJvmMatrixGeneration(inputDir, taxonGroup, 
+		outputFile, inheritValues, generateAbsentPresent, true);
 		
 		activeMatrixGenerationProcess.put(config.getConfiguration().getId(), matrixGeneration);
 		ListenableFuture<Void> futureResult = executorService.submit(matrixGeneration);
@@ -497,7 +514,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		Model model = new Model();
 		try {
 			//matrix = createTaxonMatrix(outputFile, model, config.getTaxonGroup().getName().equals("Prokaryotes"));//!
-			matrix = createTaxonMatrix(outputFile, model, true);//!
+			matrix = createTaxonMatrix(outputFile, model, false);// false: don't show whole_organism
 		} catch (IOException | JDOMException | ClassNotFoundException e) {
 			log(LogLevel.ERROR, "Couldn't create taxon matrix from generated output", e);
 			throw new MatrixGenerationException(task);
@@ -972,7 +989,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    		Value v = new Value(value);*/
 		    		Values values = cellValue.getSource();
 		    		//check represenative value: what exact is that?
-		    		edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue = values.getRepresentative();
+		    		edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue = values.getRepresentative(); 
 		    		Value v = constructMatrixReviewValueFromCompleteValue(aValue);
 		    		
 		    		

@@ -1,8 +1,8 @@
 package edu.arizona.biosemantics.etcsite.shared.rpc.auth;
 
 import java.io.Serializable;
-
-public class LoginGoogleResult implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class LoginGoogleResult implements Serializable, IsSerializable {
 
 	private AuthenticationResult authenticationResult;
 	private boolean newlyRegistered = false;

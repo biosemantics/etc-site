@@ -2,8 +2,8 @@ package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
 import java.util.Date;
-
-public class DatasetPrefix implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class DatasetPrefix implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = -446256658122228182L;
 	private String prefix;

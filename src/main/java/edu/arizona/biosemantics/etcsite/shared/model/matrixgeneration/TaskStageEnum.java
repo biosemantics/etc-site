@@ -1,6 +1,8 @@
 package edu.arizona.biosemantics.etcsite.shared.model.matrixgeneration;
 
-public enum TaskStageEnum {
+import com.google.gwt.user.client.rpc.IsSerializable;
+
+public enum TaskStageEnum implements IsSerializable{
 	CREATE_INPUT("Create/Select Input"),
     INPUT("Input"),
     PROCESS("Process"),
@@ -8,6 +10,8 @@ public enum TaskStageEnum {
     OUTPUT("Output");
 
     private String displayName;
+    
+    private TaskStageEnum () {}
 
     private TaskStageEnum(String displayName) {
         this.displayName = displayName;

@@ -1,8 +1,9 @@
 package edu.arizona.biosemantics.etcsite.shared.model.file;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public class FileTreeItem implements Serializable {
+public class FileTreeItem implements Serializable, IsSerializable {
 	
 	private String id;
 	private String name;

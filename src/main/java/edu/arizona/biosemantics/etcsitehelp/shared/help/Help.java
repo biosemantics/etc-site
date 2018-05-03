@@ -1,6 +1,7 @@
 package edu.arizona.biosemantics.etcsitehelp.shared.help;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public enum Help {
+public enum Help implements IsSerializable {
 
 	FILE_MANAGER,
 	GETTING_STARTED,
@@ -32,7 +33,9 @@ public enum Help {
 	
 	TREE_GENERATION_DEFINE,
 	TREE_GENERATION_INPUT,
-	TREE_GENERATION_VIEW,
+	TREE_GENERATION_VIEW;
+	
+	private Help () {}
 	
 	
 }

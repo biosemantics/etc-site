@@ -3,6 +3,7 @@ package edu.arizona.biosemantics.etcsite.server.enhance;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -43,6 +44,7 @@ import edu.arizona.biosemantics.semanticmarkup.enhance.know.KnowsSynonyms;
 import edu.arizona.biosemantics.semanticmarkup.enhance.know.KnowsSynonyms.SynonymSet;
 import edu.arizona.biosemantics.semanticmarkup.enhance.know.lib.CSVKnowsPartOf;
 import edu.arizona.biosemantics.semanticmarkup.enhance.know.lib.CSVKnowsSynonyms;
+import edu.arizona.biosemantics.semanticmarkup.enhance.know.lib.JustKnowsPartOf;
 import edu.arizona.biosemantics.semanticmarkup.enhance.know.lib.OWLOntologyKnowsPartOf;
 import edu.arizona.biosemantics.semanticmarkup.enhance.know.lib.OWLOntologyKnowsSynonyms;
 import edu.arizona.biosemantics.semanticmarkup.enhance.run.Run;
@@ -77,17 +79,27 @@ import edu.arizona.biosemantics.semanticmarkup.enhance.transform.old.Standardize
 public class EnhanceRun {
 
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException, OWLOntologyCreationException {
-		String inputDir = "C:/etcsitebase/etcsite/data/users/4/plant_output_by_TC_task_Plant3files_07-03-2017_1";
-		String enhanceDir = "C:/etcsitebase/etcsite/data/matrixGeneration/432/enhance";
+		//String inputDir = "C:/etcsitebase/etcsite/data/users/4/plant_output_by_TC_task_Plant3files_07-03-2017_1";
+		//String enhanceDir = "C:/etcsitebase/etcsite/data/matrixGeneration/432/enhance";
 		//String inputOntology = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_output_by_TC_task_2_output_by_OB_task_3/3.owl";
 		//String termReviewTermCategorization = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_TermsReviewed_by_TC_task_2/category_term-task-2.csv";
 		//String termReviewSynonyms = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_TermsReviewed_by_TC_task_2/category_mainterm_synonymterm-task-2.csv";
-		String inputOntology = "";
-		String termReviewTermCategorization = "";
-		String termReviewSynonyms = "";
+		
+		String inputDir = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\in";
+		String enhanceDir ="C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\out";
+		String inputOntology = "C:/Users/hongcui/Documents/research/AuthorOntology/Data/CarexOntology/Structure224.owl";
+		String partOfCSV = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\part_of.csv";
+		String termReviewTermCategorization = "C:/Users/hongcui/Documents/etcsite/data/users/1/TestMGValue_TermsReviewed_by_TC_task_TestMGValue1/category_term-task-TestMGValue1.csv";
+		String termReviewSynonyms = "C:/Users/hongcui/Documents/etcsite/data/users/1/TestMGValue_TermsReviewed_by_TC_task_TestMGValue1/category_mainterm_synonymterm-task-TestMGValue1.csv";
+		
+		ArrayList<String> knowsPartOf = new ArrayList<String>();
+		knowsPartOf.add(inputOntology);
+		knowsPartOf.add("C:/Users/hongcui/Documents/etcsite/resources/shared/ontologies/po.owl");
+		knowsPartOf.add(partOfCSV);
+
 		String taxonGroup = TaxonGroup.PLANT.toString();
 		
-		EnhanceRun enhance = new EnhanceRun(inputDir, enhanceDir, inputOntology, 
+		EnhanceRun enhance = new EnhanceRun(inputDir, enhanceDir, knowsPartOf, 
 				termReviewTermCategorization, termReviewSynonyms, TaxonGroup.valueOf(taxonGroup));
 		enhance.run();
 	}
@@ -112,15 +124,15 @@ public class EnhanceRun {
 	private Set<String> durations;
 	private String input;
 	private String output;
-	private String ontology;
+	private List<String> filePath2KnowsPartOf; //.owl or .csv
 	private String termReviewTermCategorization;
 	private String termReviewSynonyms;
 	
-	public EnhanceRun(String input, String output, String ontology, 
+	public EnhanceRun(String input, String output, List<String> filePath2KnowsPartOf, 
 			String termReviewTermCategorization, String termReviewSynonyms, TaxonGroup taxonGroup) throws IOException, InterruptedException, ExecutionException {
 		this.input = input;
 		this.output = output;
-		this.ontology = ontology;
+		this.filePath2KnowsPartOf = filePath2KnowsPartOf;
 		this.termReviewTermCategorization = termReviewTermCategorization;
 		this.termReviewSynonyms = termReviewSynonyms;
 		this.taxonGroup = taxonGroup;
@@ -142,24 +154,42 @@ public class EnhanceRun {
 	
 	public void run() throws OWLOntologyCreationException {
 		System.out.println("run --"+"doenhance");
-		System.out.println("ontology --"+ontology);
+		System.out.println("ontology --"+filePath2KnowsPartOf);
 		Run run = new Run();
-		KnowsPartOf knowsPartOf = new OWLOntologyKnowsPartOf(ontology, inflector);
-		KnowsSynonyms knowsSynonyms = new OWLOntologyKnowsSynonyms(ontology, inflector);
-		RemoveNonSpecificBiologicalEntitiesByRelations transformer1 = new RemoveNonSpecificBiologicalEntitiesByRelations(
-				knowsPartOf, knowsSynonyms, tokenizer, new CollapseBiologicalEntityToName());
-		RemoveNonSpecificBiologicalEntitiesByBackwardConnectors transformer2 = new RemoveNonSpecificBiologicalEntitiesByBackwardConnectors(
-				knowsPartOf, knowsSynonyms, tokenizer, new CollapseBiologicalEntityToName());
-		RemoveNonSpecificBiologicalEntitiesByForwardConnectors transformer3 = new RemoveNonSpecificBiologicalEntitiesByForwardConnectors(
-				knowsPartOf, knowsSynonyms, tokenizer, new CollapseBiologicalEntityToName());
-		RemoveNonSpecificBiologicalEntitiesByPassedParents transformer4 = new RemoveNonSpecificBiologicalEntitiesByPassedParents(
-				knowsPartOf, knowsSynonyms, tokenizer, new CollapseBiologicalEntityToName(), inflector);
-		
-		run.addTransformer(new SimpleRemoveSynonyms(knowsSynonyms));
-		run.addTransformer(transformer1);
-		run.addTransformer(transformer2);
-		run.addTransformer(transformer3);
-		run.addTransformer(transformer4);
+		ArrayList<String> ontologies = new ArrayList<String>();
+		ArrayList<String> csvs = new ArrayList<String>();
+		try{
+			//when knowledge entities can be constructed, use them for certain enhancement transformations
+			for(String filePath: filePath2KnowsPartOf){
+				if(filePath.endsWith(".owl")){
+					ontologies.add(filePath);
+				}else if(filePath.endsWith(".csv")){
+					csvs.add(filePath);
+				}
+			}
+			
+			KnowsSynonyms knowsSynonyms = new CSVKnowsSynonyms(termReviewSynonyms, inflector);
+			KnowsPartOf knowsPartOf = new JustKnowsPartOf(csvs, ontologies, knowsSynonyms, inflector); 
+			
+			RemoveNonSpecificBiologicalEntitiesByRelations transformer1 = new RemoveNonSpecificBiologicalEntitiesByRelations(
+					knowsPartOf, knowsSynonyms, tokenizer, new CollapseBiologicalEntityToName());
+			RemoveNonSpecificBiologicalEntitiesByBackwardConnectors transformer2 = new RemoveNonSpecificBiologicalEntitiesByBackwardConnectors(
+					knowsPartOf, knowsSynonyms, tokenizer, new CollapseBiologicalEntityToName());
+			RemoveNonSpecificBiologicalEntitiesByForwardConnectors transformer3 = new RemoveNonSpecificBiologicalEntitiesByForwardConnectors(
+					knowsPartOf, knowsSynonyms, tokenizer, new CollapseBiologicalEntityToName());
+			RemoveNonSpecificBiologicalEntitiesByPassedParents transformer4 = new RemoveNonSpecificBiologicalEntitiesByPassedParents(
+					knowsPartOf, knowsSynonyms, tokenizer, new CollapseBiologicalEntityToName(), inflector);
+			
+			run.addTransformer(new SimpleRemoveSynonyms(knowsSynonyms));
+			run.addTransformer(transformer1);
+			run.addTransformer(transformer2);
+			run.addTransformer(transformer3);
+			run.addTransformer(transformer4);
+		}catch(Exception e){
+			//when they are not available.
+			log(LogLevel.DEBUG, "Reduced enhancement due to unavailability of knowledge entities for advanced enhancements:", e);
+		}	
+
 		run.addTransformer(new SplitCompoundBiologicalEntity(inflector));
 		run.addTransformer(new SplitCompoundBiologicalEntitiesCharacters(inflector));
 		run.addTransformer(new RemoveUselessWholeOrganism());

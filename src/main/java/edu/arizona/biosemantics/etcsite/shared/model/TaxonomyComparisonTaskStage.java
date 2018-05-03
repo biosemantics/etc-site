@@ -4,8 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 import edu.arizona.biosemantics.etcsite.shared.model.taxonomycomparison.TaskStageEnum;
-
-public class TaxonomyComparisonTaskStage extends TaskStage implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class TaxonomyComparisonTaskStage extends TaskStage implements Serializable, IsSerializable {
 
 	private TaskStageEnum taskStage;
 

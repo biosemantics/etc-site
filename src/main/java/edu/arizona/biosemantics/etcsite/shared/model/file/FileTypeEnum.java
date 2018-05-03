@@ -1,7 +1,7 @@
 package edu.arizona.biosemantics.etcsite.shared.model.file;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-
-public enum FileTypeEnum {	
+public enum FileTypeEnum implements IsSerializable{	
 	/*TAXON_DESCRIPTION("Taxon Description"),
 	GLOSSARY("Glossary"),
 	EULER("Euler");
@@ -32,6 +32,8 @@ public enum FileTypeEnum {
 	
     private String displayName;
     private boolean viewable;
+    
+    private FileTypeEnum(){}
 
     private FileTypeEnum(String displayName, boolean viewable) {
         this.displayName = displayName;

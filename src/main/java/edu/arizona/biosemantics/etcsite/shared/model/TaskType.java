@@ -5,8 +5,8 @@ import java.util.Date;
 
 import edu.arizona.biosemantics.etcsite.shared.model.file.FileType;
 
-
-public class TaskType implements Serializable {
+import com.google.gwt.user.client.rpc.IsSerializable;
+public class TaskType implements Serializable, IsSerializable {
 
 	private static final long serialVersionUID = -655524918747896723L;
 	private int id;

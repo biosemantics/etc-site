@@ -3,9 +3,9 @@ package edu.arizona.biosemantics.etcsite.shared.model.matrixgeneration;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-
-public class Matrix implements Serializable {
+public class Matrix implements Serializable, IsSerializable {
 
 	private List<String> characterNames = new LinkedList<String>();
 	private List<Taxon> taxons = new LinkedList<Taxon>();

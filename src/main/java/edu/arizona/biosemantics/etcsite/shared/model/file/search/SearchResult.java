@@ -1,9 +1,10 @@
 package edu.arizona.biosemantics.etcsite.shared.model.file.search;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 import java.util.Set;
 
-public class SearchResult implements Serializable, Comparable<SearchResult> {
+public class SearchResult implements Serializable,IsSerializable, Comparable<SearchResult> {
 
 	private static final long serialVersionUID = -2060179646121834566L;
 	//private int occurrences;

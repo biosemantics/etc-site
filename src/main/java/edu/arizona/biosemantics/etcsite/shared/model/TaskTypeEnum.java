@@ -1,8 +1,9 @@
 package edu.arizona.biosemantics.etcsite.shared.model;
 
 import java.io.Serializable;
+import com.google.gwt.user.client.rpc.IsSerializable;
 
-public enum TaskTypeEnum implements Serializable {
+public enum TaskTypeEnum implements Serializable, IsSerializable {
 	SEMANTIC_MARKUP("Text Capture"),
 	ONTOLOGIZE("Ontology Building"),
 	MATRIX_GENERATION("Matrix Generation"),
