@@ -267,7 +267,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 			} catch (PermissionDeniedException | CreateDirectoryFailedException e1) {
 				throw new MatrixGenerationException(task);
 			}
-			System.out.println(config.getTaxonGroup().getName()+"]]]]");
+			//System.out.println(config.getTaxonGroup().getName()+"]]]]");
 			if(config.getTaxonGroup().getName().equals("Prokaryotes")){
 				doMatrixGeneration(token, task, config, config.getInput());
 			}else{
@@ -326,10 +326,10 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		}
 		//add default part_of csv for all taxon groups
 		String taxonOntologyPath = Configuration.charaparser_ontologies + File.separator;
-		
+		String partOfCsvPath = Configuration.partOfCsvPath + File.separator;
 		//add default entity ontology for the taxon group
 		Set<Ontology> defaultOntos = TaxonGroupOntology.getEntityOntologies(edu.arizona.biosemantics.common.biology.TaxonGroup.valueFromDisplayName(config.getTaxonGroup().getName()));
-		ontologyFiles = ontologyFiles+"#"+taxonOntologyPath + "part_of.csv";	
+		ontologyFiles = ontologyFiles+"#"+partOfCsvPath + "part_of.csv";	
 		for(Ontology onto : defaultOntos){
 			ontologyFiles = ontologyFiles+"#"+taxonOntologyPath + onto.toString().toLowerCase() + ".owl";		
 		}
@@ -337,9 +337,9 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		ontologyFiles = ontologyFiles.replaceFirst("^#", ""); //#-separated file paths, could be empty
 		
 		final String enhanceDir = this.getTempDir(task) + File.separator + "enhance";
-		//final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFiles, categoryTerm, synonym, taxonGroup);
+		final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFiles, categoryTerm, synonym, taxonGroup);
 		//Don't use InJvm this because of owlapi dependency problem
-		final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFiles, categoryTerm, synonym, taxonGroup);
+		//final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFiles, categoryTerm, synonym, taxonGroup);
 	
 		activeEnhanceProcess.put(config.getConfiguration().getId(), enhance);
 		final ListenableFuture<Void> futureResult = executorService.submit(enhance);
@@ -458,17 +458,17 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		String taxonGroup = config.getTaxonGroup().getName().toUpperCase();
 		boolean inheritValues = config.isInheritValues();
 		boolean generateAbsentPresent = config.isGenerateAbsentPresent();
-		//System.out.println(taxonGroup+"--"+"doMatrixGeneration");
+		////System.out.println(taxonGroup+"--"+"doMatrixGeneration");
 		//because etc-site and matrix generation uses different versions of OWLAPI, always use ExtraJvm for local and server.
-		//final MatrixGeneration matrixGeneration = new ExtraJvmMatrixGeneration(inputDir, taxonGroup, 
-		//outputFile, inheritValues, generateAbsentPresent, true);
-		final MatrixGeneration matrixGeneration = new InJvmMatrixGeneration(inputDir, taxonGroup, 
+		final MatrixGeneration matrixGeneration = new ExtraJvmMatrixGeneration(inputDir, taxonGroup, 
 		outputFile, inheritValues, generateAbsentPresent, true);
+		//final MatrixGeneration matrixGeneration = new InJvmMatrixGeneration(inputDir, taxonGroup, 
+		//outputFile, inheritValues, generateAbsentPresent, true);
 		
 		activeMatrixGenerationProcess.put(config.getConfiguration().getId(), matrixGeneration);
 		ListenableFuture<Void> futureResult = executorService.submit(matrixGeneration);
 		activeProcessFutures.put(config.getConfiguration().getId(), futureResult);
-		//System.out.println("run --"+"doMatrixGeneration");
+		////System.out.println("run --"+"doMatrixGeneration");
 		futureResult.addListener(new Runnable() {
 	     	public void run() {	
 	     		try {
@@ -784,7 +784,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		String path = Configuration.matrixReview_tempFileBase + 
 				File.separator + "matrix-review" + File.separator + authenticationToken.getUserId() +
 				File.separator + "matrix_task-" + task.getName() + extName;
-		//System.out.println(path);
+		////System.out.println(path);
 		/*
 		File file = new File(path);
 		file.getParentFile().mkdirs();
@@ -880,7 +880,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 	    	
 	    	List<edu.arizona.biosemantics.matrixgeneration.model.complete.Taxon> taxa = rawMatrix.getSource().getTaxa();
 //			for(edu.arizona.biosemantics.matrixgeneration.model.complete.Value v : rawMatrix.getSource().getValues())
-//				System.out.println(v.getValue()+"===>"+v.getStatement().getText());
+//				//System.out.println(v.getValue()+"===>"+v.getStatement().getText());
 			
 			
 	    	edu.arizona.biosemantics.matrixgeneration.model.complete.Matrix completeMatrix = rawMatrix.getSource();
@@ -976,13 +976,13 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    //set values
 		    for(Taxon taxon : taxonMatrix.getFlatTaxa()) {
 		    	RowHead rowHead = taxonRowHeadMap.get(taxon);
-		    	//System.out.println("taxon " + rowHead.getValue());
+		    	////System.out.println("taxon " + rowHead.getValue());
 		    	for(int j=0; j<charactersInMatrix.size(); j++) {
 		    		Character character = charactersInMatrix.get(j);
 		    		CellValue cellValue = rawMatrix.getCellValues().get(rowHead).get(j);
 		    		
-		    		//System.out.println("character " + character.getName() + " value " + cellValue.getText());
-		    		//System.out.println(cellValue.getGenerationProvenance());
+		    		////System.out.println("character " + character.getName() + " value " + cellValue.getText());
+		    		////System.out.println(cellValue.getGenerationProvenance());
 		    		
 		    		/* 3.19.18
 		    		 * String value = cellValue.getText();
@@ -996,11 +996,11 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    		
 		    		for(edu.arizona.biosemantics.matrixgeneration.model.complete.Value cvalue : cellValue.getSource()) {
 		    			//if(cvalue == null) 
-		    			//	System.out.println("null cvalue:"+cvalue);
+		    			//	//System.out.println("null cvalue:"+cvalue);
 		    			//else
-		    			//	System.out.println(cvalue.getGenerationProvenance());
+		    			//	//System.out.println(cvalue.getGenerationProvenance());
 		    			if(cvalue!=null) v.addValueStatement(cvalue.getValue(), cvalue.getStatement().getText());
-		    			//System.out.println("character " + character.getName() + " value " + cvalue.getValue()+" SOURCE:"+cvalue.getStatement().getText());
+		    			////System.out.println("character " + character.getName() + " value " + cvalue.getValue()+" SOURCE:"+cvalue.getStatement().getText());
 		    		}
 		    		
 		    		Set<Provenance> provenanceSet = new HashSet<Provenance>();
@@ -1021,7 +1021,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    			}
 		    			if(provenance instanceof TaxonomyDescendantInheritanceProvenance) {
 		    				model.setColor(v, inheritedColor);
-		    				//System.out.println("inherited");
+		    				////System.out.println("inherited");
 		    			}
 		    			if(provenance instanceof SemanticMarkupProvenance) {
 		    				SemanticMarkupProvenance semanticMarkupProvenance = (SemanticMarkupProvenance)provenance;
@@ -1029,16 +1029,16 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    						!characterCharacterMap.get(character).equals(semanticMarkupProvenance.getCharacter())) {
 		    				} else {
 		    					model.setColor(v, sourceColor);
-			    				//System.out.println("source");
+			    				////System.out.println("source");
 		    				}
 		    			}
 		    			if(provenance instanceof OntologySubclassProvenance) {
 		    				model.setColor(v, ontologyColor);
-		    				//System.out.println("ontologycolor");
+		    				////System.out.println("ontologycolor");
 		    			}
 		    			if(provenance instanceof OntologySuperclassProvenance) {
 		    				model.setColor(v, ontologyColor);
-		    				//System.out.println("ontologycolor");
+		    				////System.out.println("ontologycolor");
 		    			}
 		    		}
 		    		
@@ -1046,7 +1046,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    			if(cellValue.getContainedValues().contains("present") && 
 			    				cellValue.getContainedValues().contains("absent")) {
 			    			model.setColor(v, conflictColor);
-			    			//System.out.println("conflict");
+			    			////System.out.println("conflict");
 			    		}
 		    		}
 		    		

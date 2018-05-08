@@ -39,9 +39,9 @@ public class FilePathShortener {
 		ServerSetup.getInstance().getSetup().setSeperator("/");
 		ServerSetup.getInstance().getSetup().setPublicFolder("/var/lib/etcsite/public");
 		FilePathShortener shortener = new FilePathShortener();
-		System.out.println(shortener.shortenPath("/var/lib/etcsite/users/1/something/1.xml"));
-		System.out.println(shortener.shortenPath("/var/lib/etcsite/users/2/something/1.xml"));
-		System.out.println(shortener.shortenPath("/var/lib/etcsite/public/1/something/1.xml"));
+		//System.out.println(shortener.shortenPath("/var/lib/etcsite/users/1/something/1.xml"));
+		//System.out.println(shortener.shortenPath("/var/lib/etcsite/users/2/something/1.xml"));
+		//System.out.println(shortener.shortenPath("/var/lib/etcsite/public/1/something/1.xml"));
 	}
 	
 	public String shortenPath(String filePath) {

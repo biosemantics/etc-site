@@ -196,9 +196,9 @@ public class DirectoryDownload {
 	//TODO: add some security for the task really being shared with the user
 	//add some general task permission check service
 	private Task getTaskFromFilePath(String filePath) {
-		/*System.out.println("1" + filePath);
-		System.out.println("2" + filePath.lastIndexOf("."));
-		System.out.println("3" + filePath.substring(filePath.lastIndexOf(".") + 1)); */
+		/*//System.out.println("1" + filePath);
+		//System.out.println("2" + filePath.lastIndexOf("."));
+		//System.out.println("3" + filePath.substring(filePath.lastIndexOf(".") + 1)); */
 		int taskId = Integer.parseInt(filePath.substring(filePath.lastIndexOf(".") + 1));
 		return daoManager.getTaskDAO().getTask(taskId);
 	}

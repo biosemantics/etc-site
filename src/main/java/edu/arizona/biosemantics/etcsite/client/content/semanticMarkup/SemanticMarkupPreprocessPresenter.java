@@ -280,20 +280,20 @@ public class SemanticMarkupPreprocessPresenter implements ISemanticMarkupPreproc
 		updateBracketCounts(bracketCounts);
 		text = bracketColorizer.colorize(text);
 		
-		/*System.out.println(display.getTextArea().getFormatter().getForeColor());
-		System.out.println(display.getTextArea().getFormatter().isBold());
+		/*//System.out.println(display.getTextArea().getFormatter().getForeColor());
+		//System.out.println(display.getTextArea().getFormatter().isBold());
 		*/
 		view.setHTML(text);
 		
 		/*
-		System.out.println(display.getTextArea().getFormatter().getForeColor());
-		System.out.println(display.getTextArea().getFormatter().isBold());
+		//System.out.println(display.getTextArea().getFormatter().getForeColor());
+		//System.out.println(display.getTextArea().getFormatter().isBold());
 		
 		formatter.setForeColor("black");
 		formatter.toggleBold();
 		
-		System.out.println(display.getTextArea().getFormatter().getForeColor());
-		System.out.println(display.getTextArea().getFormatter().isBold());
+		//System.out.println(display.getTextArea().getFormatter().getForeColor());
+		//System.out.println(display.getTextArea().getFormatter().isBold());
 		*/
 		
 		/*try {

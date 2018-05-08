@@ -3,6 +3,7 @@ package edu.arizona.biosemantics.etcsite.server.rpc.matrixgeneration;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 import edu.arizona.biosemantics.common.biology.TaxonGroup;
@@ -18,7 +19,7 @@ public class ExtraJvmEnhance extends ExtraJvmCallable<Void> implements Enhance {
 	public static class MainWrapper {
 		
 		public static void main(String[] args) {
-			//System.out.println(args);
+			////System.out.println(args);
 			String inputDir = null;
 			String tempDir = null;
 			String inputOntology = null;
@@ -26,41 +27,41 @@ public class ExtraJvmEnhance extends ExtraJvmCallable<Void> implements Enhance {
 			String termReviewSynonyms = null;
 			String taxonGroup = null;
 			if(args.length == 6) {
-				//System.out.println(6);
+				////System.out.println(6);
 				inputDir = args[0];
 				tempDir = args[1];
 				inputOntology = args[2];
 				termReviewTermCategorization = args[3];
 				termReviewSynonyms = args[4];
 				taxonGroup = args[5];
-			} else if(args.length == 3) {
-				//System.out.println(3);
+			}/* else if(args.length == 3) {
+				////System.out.println(3);
 				inputDir = args[0];
 				tempDir = args[1];
 				taxonGroup = args[2];
-			}
+			}*/
 			try {
-				if(inputOntology != null && !inputOntology.isEmpty() 
-						&& termReviewTermCategorization != null && !termReviewTermCategorization.isEmpty()
-						&& termReviewSynonyms != null && !termReviewSynonyms.isEmpty()) {
-					System.out.println("Run Enhance: \n" + inputDir + " \n" + tempDir + " \n" + inputOntology + "\n " + termReviewTermCategorization + "\n"
-							+ termReviewSynonyms + "\n" + taxonGroup );
-					ArrayList<String> knowsFilePaths = (ArrayList<String>) Arrays.asList(inputOntology.split("#"));
+				//if(inputOntology != null && !inputOntology.isEmpty() 
+				//		&& termReviewTermCategorization != null && !termReviewTermCategorization.isEmpty()
+				//		&& termReviewSynonyms != null && !termReviewSynonyms.isEmpty()) {
+					////System.out.println("Run Enhance: \n" + inputDir + " \n" + tempDir + " \n" + inputOntology + "\n " + termReviewTermCategorization + "\n"
+					//		+ termReviewSynonyms + "\n" + taxonGroup );
+					List<String> knowsFilePaths = (List<String>) Arrays.asList(inputOntology.split("#"));
 					EnhanceRun enhance = new EnhanceRun(inputDir, tempDir, knowsFilePaths, 
 							termReviewTermCategorization, termReviewSynonyms, TaxonGroup.valueOf(taxonGroup));
 					enhance.run();
-					System.out.println("Done Running Minimal Enhance");
-				} else {
-					System.out.println("Run Minimal Enhance: \n" + inputDir + " \n" + tempDir + " \n" + taxonGroup );
+					////System.out.println("Done Running Enhance");
+				/*} else {
+					//System.out.println("Run Minimal Enhance: \n" + inputDir + " \n" + tempDir + " \n" + taxonGroup );
 					MinimalEnhanceRun enhance = new MinimalEnhanceRun(inputDir, tempDir, TaxonGroup.valueOf(taxonGroup));
 					enhance.run();
-					System.out.println("Done Running Minimal Enhance");
-				}			
+					//System.out.println("Done Running Minimal Enhance");
+				}*/			
 			} catch (Throwable t) {
-				System.out.println("ExtraJvmEnhance failed with throwable "+t.getMessage());
-				System.out.println(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(t));
+				//System.out.println("ExtraJvmEnhance failed with throwable "+t.getMessage());
+				//System.out.println(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(t));
 				
-				if(t.getCause()!=null) System.out.println("caused by "+org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(t.getCause()));
+				if(t.getCause()!=null) //System.out.println("caused by "+org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(t.getCause()));
 				System.exit(-1);
 			}
 		}

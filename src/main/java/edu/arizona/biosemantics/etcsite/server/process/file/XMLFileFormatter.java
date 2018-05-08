@@ -84,7 +84,7 @@ public class XMLFileFormatter implements IFileFormatter {
 
 	public String formatAndHiglight(String content, NodeList nodeList) {		
 		/*try {
-			System.out.println("content " + content);
+			//System.out.println("content " + content);
 			Document doc = DocumentHelper.parseText(content);  
 			try(StringWriter sw = new StringWriter()) {
 				OutputFormat format = OutputFormat.createPrettyPrint();  
@@ -92,7 +92,7 @@ public class XMLFileFormatter implements IFileFormatter {
 				XMLWriter xw = new HighlightXMLWriter(sw, format, nodeList);  
 				xw.write(doc);  
 				String result = sw.toString();
-				System.out.println("result " + result);
+				//System.out.println("result " + result);
 				return result;
 			}
 		} catch (Exception e) {

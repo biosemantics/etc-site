@@ -122,8 +122,8 @@ public class AuthenticationService extends RemoteServiceServlet implements IAuth
 			log(LogLevel.ERROR, "Couldn't read from url", e);
 		}
 		//int responseCode = connection.getResponseCode();
-		//System.out.println("Sending GET request to " + url.getPath());
-		//System.out.println("Response code: " + responseCode);
+		////System.out.println("Sending GET request to " + url.getPath());
+		////System.out.println("Response code: " + responseCode);
 		
 		if(connection != null) {
 			try(BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()))) {
@@ -132,7 +132,7 @@ public class AuthenticationService extends RemoteServiceServlet implements IAuth
 				while ((line = reader.readLine()) != null){
 					response.append(line);
 				}
-				//System.out.println("Got the result: \n" + response.toString());
+				////System.out.println("Got the result: \n" + response.toString());
 				
 				String id = null;
 				String firstName = null;

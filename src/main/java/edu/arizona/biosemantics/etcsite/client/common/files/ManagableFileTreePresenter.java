@@ -85,7 +85,7 @@ public class ManagableFileTreePresenter implements IManagableFileTreeView.Presen
 	    display.getUploader().addOnChangeUploadHandler(new OnChangeUploaderHandler() {
 			@Override
 			public void onChange(IUploader uploader) {
-				System.out.println("on change");
+				//System.out.println("on change");
 			}
 	    });*/
 	    view.getUploader().setStatusWidget(statusWidget);

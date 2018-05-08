@@ -153,8 +153,8 @@ public class EnhanceRun {
 	}
 	
 	public void run() throws OWLOntologyCreationException {
-		System.out.println("run --"+"doenhance");
-		System.out.println("ontology --"+filePath2KnowsPartOf);
+		//System.out.println("run --"+"doenhance");
+		//System.out.println("ontology --"+filePath2KnowsPartOf);
 		Run run = new Run();
 		ArrayList<String> ontologies = new ArrayList<String>();
 		ArrayList<String> csvs = new ArrayList<String>();

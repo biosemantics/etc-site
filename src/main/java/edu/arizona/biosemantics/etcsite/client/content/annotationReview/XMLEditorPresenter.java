@@ -76,7 +76,7 @@ public class XMLEditorPresenter implements IXMLEditorView.Presenter {
 	    for (byte b : bytes) {
 	    	 sb.append(Integer.toHexString(b & 0xFF) + " ");
 	    }
-	    System.out.println(sb.toString());*/
+	    //System.out.println(sb.toString());*/
 		
 		fileFormatService.isValidMarkedupTaxonDescriptionContent(Authentication.getInstance().getToken(), view.getText(), new AsyncCallback<Boolean>() {
 			@Override

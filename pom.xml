@@ -379,7 +379,7 @@
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.matrixgeneration</groupId>
 		  <artifactId>matrix-generation</artifactId>
-		  <version>0.1.63-SNAPSHOT</version>
+		  <version>0.1.70-SNAPSHOT</version>
 		  <exclusions>
 		  	<exclusion>
 		  		<artifactId>owlapi-tools</artifactId>
@@ -492,6 +492,9 @@
 <!-- 			<version>1.9.13</version> -->
 <!-- 			<classifier>sources</classifier> -->
 <!-- 		</dependency> -->
+
+
+<!-- matrix generation uses older version of OWLAPI 4, ELK that requires jackson 1.9.13, but other parts of etc used OWL API 5, which needs jackson 2.8.5  -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-core</artifactId>
@@ -531,6 +534,21 @@
 		    <version>2.8.5</version>
 		    <classifier>sources</classifier>
 		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.semanticweb.elk/elk-owlapi-standalone -->
+<dependency>
+    <groupId>org.semanticweb.elk</groupId>
+    <artifactId>elk-owlapi-standalone</artifactId>
+    <version>0.4.3</version>
+    <type>pom</type>
+</dependency>
+		<!-- https://mvnrepository.com/artifact/org.semanticweb.elk/elk-owlapi -->
+<dependency>
+    <groupId>org.semanticweb.elk</groupId>
+    <artifactId>elk-owlapi</artifactId>
+    <version>0.4.3</version>
+</dependency>
+		
 		
 		<dependency>
 			<groupId>edu.arizona.biosemantics.common</groupId>

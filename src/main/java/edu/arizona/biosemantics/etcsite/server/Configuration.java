@@ -121,6 +121,8 @@ public class Configuration extends edu.arizona.biosemantics.etcsite.shared.Confi
 
 	public static Set<String> illegalOrderModifiers;
 
+	public static String partOfCsvPath;
+
 
 	
 	static {		
@@ -164,6 +166,8 @@ public class Configuration extends edu.arizona.biosemantics.etcsite.shared.Confi
 			semanticMarkup_parseStep_maxRunningTimeMinutes = Integer.valueOf(properties.getProperty("semanticMarkup_parseStep_maxRunningTimeMinutes"));
 			micropie_classpath = properties.getProperty("micropie_classpath");
 			micropie_models = properties.getProperty("micropie_models");
+			
+			partOfCsvPath = properties.getProperty("partOfCsvPath");
 			
 			matrixGeneration_tempFileBase = properties.getProperty("matrixGeneration_tempFileBase").replaceAll("/", Matcher.quoteReplacement(File.separator));
 			maxActiveMatrixGeneration = Integer.parseInt(properties.getProperty("maxActiveMatrixGeneration"));

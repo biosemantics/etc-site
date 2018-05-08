@@ -134,13 +134,13 @@ public class XMLValidator implements IContentValidator {
 		File file = new File("C:\\etcsitebase\\etcsite\\data\\textCapture\\charaparser\\387\\out\\Fernald_Rosaceae_1950.xml");
 		byte[] bytes = Files.readAllBytes(Paths.get(file.getAbsolutePath()));
 		String fileContent = new String(bytes, Charset.forName("UTF8"));
-		//System.out.println(fileContent);
+		////System.out.println(fileContent);
 		
 		XMLValidator taxonDescriptionValidator = new XMLValidator(new File("semanticMarkupOutput.xsd"));
 		//XMLValidator xmlValidator = new XMLValidator("http://raw.githubusercontent.com/biosemantics/schemas/0.0.1/semanticMarkupInput.xsd;https://raw.githubusercontent.com/biosemantics/schemas/master/semanticMarkupOutput.xsd");
 		
-		System.out.println(taxonDescriptionValidator.validate(fileContent));
-		System.out.println(taxonDescriptionValidator.getInvalidMessage());
+		//System.out.println(taxonDescriptionValidator.validate(fileContent));
+		//System.out.println(taxonDescriptionValidator.getInvalidMessage());
 		//validate();
 	}
 	
@@ -175,15 +175,15 @@ public class XMLValidator implements IContentValidator {
 	        StreamSource xmlFile = new StreamSource(xml);
 	        validator.validate(xmlFile);
 	        if(!exceptions.isEmpty()) {
-	        	System.out.println("invalid");
+	        	//System.out.println("invalid");
 	        	 for(SAXParseException saxParseException : exceptions) {
-	 	        	System.out.println(saxParseException.getLineNumber());
-	 	        	System.out.println(saxParseException.getColumnNumber());
-	 	        	System.out.println(saxParseException.getMessage());
-	 	        	System.out.println(saxParseException.getLocalizedMessage());
+	 	        	//System.out.println(saxParseException.getLineNumber());
+	 	        	//System.out.println(saxParseException.getColumnNumber());
+	 	        	//System.out.println(saxParseException.getMessage());
+	 	        	//System.out.println(saxParseException.getLocalizedMessage());
 	 	        }
 	        } else {
-	        	System.out.println("valid");
+	        	//System.out.println("valid");
 	        }
 	    } catch(SAXException e) {
 	    	e.printStackTrace();

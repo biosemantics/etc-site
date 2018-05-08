@@ -286,7 +286,7 @@ public class ToOTOSender2 {
 	public static void main(String[] args) {
 		String test = "more or less coriaceous";
 		ToOTOSender2 toOTOSender2 = new ToOTOSender2(null, null);
-		System.out.println("result: " + toOTOSender2.normalize(test, new HashSet<String>()));
+		//System.out.println("result: " + toOTOSender2.normalize(test, new HashSet<String>()));
 	}
 
 	private Set<String> getNormalizedToCharacterStates(String[] toParts, Set<String> collectionCharacterStates) {

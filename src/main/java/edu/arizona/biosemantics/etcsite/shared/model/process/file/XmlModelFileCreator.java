@@ -205,7 +205,7 @@ public class XmlModelFileCreator {
 		boolean insideContinuousValue = false;
 		StringBuilder valueBuilder = new StringBuilder();
 		for(String line : treatmentText.split("\n")) {
-			//System.out.println(line);
+			////System.out.println(line);
 			line = line.trim();
 			int colonIndex = line.indexOf(":");
 			if(colonIndex == -1 && insideContinuousValue) {

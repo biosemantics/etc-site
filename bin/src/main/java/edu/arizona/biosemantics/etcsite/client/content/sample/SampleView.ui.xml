@@ -18,7 +18,7 @@
 
 	<lay:CenteredContentPanel>
 		<g:VerticalPanel>
-		    <g:Label styleName="{style.header}">Sample Test Data</g:Label>
+		    <g:Label styleName="{style.header}">Sample Input Test Data</g:Label>
 		    <g:TextArea ui:field="textArea" styleName="{style.textArea}"/>
 		    <g:HTMLPanel>
 				    <div style="font-weight: bold">Brief video tutorials (Please wait a moment for the video to load)</div>

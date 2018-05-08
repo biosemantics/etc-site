@@ -3,6 +3,7 @@ package edu.arizona.biosemantics.etcsite.server;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.ProcessBuilder.Redirect;
 import java.util.LinkedList;
@@ -89,6 +90,10 @@ public abstract class ExtraJvmCallable<T> implements Callable<T>, Task {
 				command += " " + arg;
 			else
 				command += " '" + arg + "'";
+		
+		if(System.getProperty("os.name").startsWith("Windows")){
+			command = command.replaceAll("'", "");
+		}
 		log(LogLevel.INFO, "Run in an extra JVM: " + command);
 		
 		exitStatus = -1;
@@ -112,7 +117,7 @@ public abstract class ExtraJvmCallable<T> implements Callable<T>, Task {
 			for(String arg : args)
 				commandParts.add(arg);
 				
-			System.out.println(commandParts.toString());
+			//System.out.println(commandParts.toString());
 			ProcessBuilder processBuilder = new ProcessBuilder(commandParts);
 			if(pathEnvironment != null)
 				processBuilder.environment().put("PATH", pathEnvironment);
@@ -133,7 +138,7 @@ public abstract class ExtraJvmCallable<T> implements Callable<T>, Task {
 				long time = System.currentTimeMillis();
 				process = processBuilder.start();
 				
-				try (BufferedReader stdInput = new BufferedReader(
+				/*try (BufferedReader stdInput = new BufferedReader(
 						new InputStreamReader(process.getInputStream()))) {
 					String s = "";
 					while ((s = stdInput.readLine()) != null) {
@@ -153,11 +158,24 @@ public abstract class ExtraJvmCallable<T> implements Callable<T>, Task {
 										/ 1000 + " seconds");
 						err.append(e + "\n");
 					}
-				}
+				}*/
+				// any error message?
+	            StreamGobbler errorGobbler = new 
+	                StreamGobbler(process.getErrorStream(), "ERROR");            
+	            
+	            // any output?
+	            StreamGobbler outputGobbler = new 
+	                StreamGobbler(process.getInputStream(), "OUTPUT");
+	                
+	            // kick them off
+	            errorGobbler.start();
+	            outputGobbler.start();
+	                                    
 				
 				exitStatus = process.waitFor();
+				
 			} catch(IOException | InterruptedException e) {
-				log(LogLevel.ERROR, "ExtraJVM process couldn't execute successfully", e);
+				log(LogLevel.ERROR, "ExtraJVM process didn't execute successfully", e);
 			}
 			
 			return createReturn();
@@ -185,6 +203,33 @@ public abstract class ExtraJvmCallable<T> implements Callable<T>, Task {
 	@Override
 	public boolean isExecutedSuccessfully() {
 		return exitStatus == 0;
+	}
+	
+	class StreamGobbler extends Thread
+	{
+	    InputStream is;
+	    String type;
+	    
+	    StreamGobbler(InputStream is, String type)
+	    {
+	        this.is = is;
+	        this.type = type;
+	    }
+	    
+	    public void run()
+	    {
+	        try
+	        {
+	            InputStreamReader isr = new InputStreamReader(is);
+	            BufferedReader br = new BufferedReader(isr);
+	            String line=null;
+	            while ( (line = br.readLine()) != null)
+	                System.out.println(type + ">" + line);    
+	            } catch (IOException ioe)
+	              {
+	                ioe.printStackTrace();  
+	              }
+	    }
 	}
 
 }

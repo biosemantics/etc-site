@@ -264,7 +264,7 @@ public class CreateSemanticMarkupFilesPresenter implements ICreateSemanticMarkup
 				
 				String error = overallError.toString();
 				if(error.isEmpty()){
-					System.out.println(destinationFilePath);
+					//System.out.println(destinationFilePath);
 					createXmlFiles(modelFiles, destinationFilePath);
 					view.removePAddtionalTaxonRanks();
 					view.resetPDescriptions();
@@ -354,7 +354,7 @@ public class CreateSemanticMarkupFilesPresenter implements ICreateSemanticMarkup
 				
 				String error = overallError.toString();
 				if(error.isEmpty()){
-					System.out.println(destinationFilePath);
+					//System.out.println(destinationFilePath);
 					createXmlFiles(modelFiles, destinationFilePath);
 					view.removeAddtionalTaxonRanks();
 					view.resetDescriptions();

@@ -670,7 +670,7 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 		List<TaxonIdentificationEntry> result = new LinkedList<TaxonIdentificationEntry>();
 		if(ranksGrid.getRowCount() <= 2) 
 			return result;
-		System.out.println(ranksGrid.getRowCount());
+		//System.out.println(ranksGrid.getRowCount());
 		for(int i = 1; i <= ranksGrid.getRowCount() - 2; i++){ //row 0 is the header row, also there is a button at the end of table
 			Widget rankWidget = ranksGrid.getWidget(i, 0);
 			Widget valueWidget = ranksGrid.getWidget(i, 1);
@@ -701,7 +701,7 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 		List<TaxonIdentificationEntry> result = new LinkedList<TaxonIdentificationEntry>();
 		if(PranksGrid.getRowCount() <= 2) 
 			return result;
-		System.out.println(PranksGrid.getRowCount());
+		//System.out.println(PranksGrid.getRowCount());
 		for(int i = 1; i <= PranksGrid.getRowCount() - 2; i++){ //row 0 is the header row, also there is a button at the end of table
 			Widget rankWidget = PranksGrid.getWidget(i, 0);
 			Widget valueWidget = PranksGrid.getWidget(i, 1);
@@ -729,7 +729,7 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 	
 	public List<DescriptionEntry> getDescriptionsList(){
 		List<DescriptionEntry> entries = new LinkedList<DescriptionEntry>();
-		System.out.println(descriptionGrid.getRowCount());
+		//System.out.println(descriptionGrid.getRowCount());
 		if (descriptionGrid.getRowCount() <= 2) 
 			return entries;
 		for(int i = 1; i <= descriptionGrid.getRowCount() - 2; i++){

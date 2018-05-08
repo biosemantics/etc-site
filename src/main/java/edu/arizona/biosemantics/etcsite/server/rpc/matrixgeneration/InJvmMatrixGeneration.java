@@ -49,7 +49,7 @@ public class InJvmMatrixGeneration implements MatrixGeneration {
 		addArg(argList, "output_format", "serialize");
 		
 		String[] args = argList.toArray(new String[argList.size()]);
-		System.out.println(args);
+		//System.out.println(args);
 		try {
 			CLIMain.main(args);
 			executedSuccessfully = true;

@@ -160,7 +160,7 @@ public class FileAccessService extends RemoteServiceServlet implements IFileAcce
 			TransformerFactory tf = TransformerFactory.newInstance();
 			try(InputStream xslt = new FileInputStream("xmlverbatim.xsl"); // or FileInputStream
 			Transformer t = tf.newTransformer(new StreamSource(xslt));
-			System.out.println(t);
+			//System.out.println(t);
 			t.setParameter("indent-elements", "yes");
 			try(ByteArrayOutputStream s = new ByteArrayOutputStream();
 			t.transform(new StreamSource(new ByteArrayInputStream(content.getBytes())), new StreamResult(s));

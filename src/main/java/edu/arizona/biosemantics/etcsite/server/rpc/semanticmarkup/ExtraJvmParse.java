@@ -78,11 +78,11 @@ public class ExtraJvmParse extends ExtraJvmCallable<ParseResult> implements Char
 				"-n", databaseHost, "-p", databasePort, "-d", databaseName, "-u", databaseUser, 
 				"-s", databasePassword, "-i", input, "-z" , tablePrefix, "-y", "-o", otoLiteURL}; */
 		
-		//System.out.println();
+		////System.out.println();
 		//for(String arg : args) {
-		//	System.out.print(arg + " ");
+		//	//System.out.print(arg + " ");
 		//}
-		//System.out.println();
+		////System.out.println();
 		
 		return args;
 		//File outputFile = new File("workspace" + File.separator + tablePrefix + File.separator + "out");
