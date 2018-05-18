@@ -93,6 +93,7 @@ import edu.arizona.biosemantics.matrixreview.server.MatrixFileUtil;
 import edu.arizona.biosemantics.matrixreview.shared.model.Color;
 import edu.arizona.biosemantics.matrixreview.shared.model.Model;
 import edu.arizona.biosemantics.matrixreview.shared.model.core.Character;
+import edu.arizona.biosemantics.matrixreview.shared.model.core.CompleteValue;
 import edu.arizona.biosemantics.matrixreview.shared.model.core.Organ;
 import edu.arizona.biosemantics.matrixreview.shared.model.core.Taxon;
 import edu.arizona.biosemantics.matrixreview.shared.model.core.TaxonMatrix;
@@ -878,7 +879,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 	    try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(rawMatrixFilePath))) {
 	    	Matrix rawMatrix = (Matrix)objectInputStream.readObject();
 	    	
-	    	List<edu.arizona.biosemantics.matrixgeneration.model.complete.Taxon> taxa = rawMatrix.getSource().getTaxa();
+	    	//List<edu.arizona.biosemantics.matrixgeneration.model.complete.Taxon> taxa = rawMatrix.getSource().getTaxa();
 //			for(edu.arizona.biosemantics.matrixgeneration.model.complete.Value v : rawMatrix.getSource().getValues())
 //				//System.out.println(v.getValue()+"===>"+v.getStatement().getText());
 			
@@ -984,15 +985,17 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    		////System.out.println("character " + character.getName() + " value " + cellValue.getText());
 		    		////System.out.println(cellValue.getGenerationProvenance());
 		    		
-		    		/* 3.19.18
-		    		 * String value = cellValue.getText();
+		    		/* 3.19.18 pack complete info of Values in Value to taxon comparison
+		    		 * String value = cellValue.getText(); //"distinct | quite distinct | united"
 		    		Value v = new Value(value);*/
-		    		Values values = cellValue.getSource();
-		    		//check represenative value: what exact is that?
-		    		edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue = values.getRepresentative(); 
-		    		Value v = constructMatrixReviewValueFromCompleteValue(aValue);
+		    		String value = cellValue.getText();
+		    		Values values = cellValue.getSource(); //multiple values of a character:fusion = distinct|united
+		    		//check represenative value:the first value in values 
+		    		//edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue = values.getRepresentative(); 
+		    		ArrayList<CompleteValue> completeValues = copyValues(values);
+		    		Value v = new Value(value, completeValues);
 		    		
-		    		
+
 		    		
 		    		for(edu.arizona.biosemantics.matrixgeneration.model.complete.Value cvalue : cellValue.getSource()) {
 		    			//if(cvalue == null) 
@@ -1058,41 +1061,48 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 	    }
 	}
 
-	private Value constructMatrixReviewValueFromCompleteValue(
-			edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue) {
 	
-		Value value = new Value(aValue.getValue()); //check this: value attribute or the text value in a matrix cell?
-		value.setModifier(aValue.getModifier());
-		value.setConstraint(aValue.getConstraint());
-		value.setConstraintId(aValue.getConstraintId());
-		value.setNegation(aValue.getNegation());
-		value.setType(aValue.getType());
-		value.setCharType(aValue.getCharType());
-		value.setFrom(aValue.getFrom());
-		value.setFromInclusive(aValue.getFromInclusive());
-		value.setFromUnit(aValue.getFromUnit());
-		value.setFromModifier(aValue.getFromModifier());
-		value.setGeographicalConstraint(aValue.getGeographicalConstraint());
-		value.setInBrackets(aValue.getInBrackets());
-		value.setOrganConstraint(aValue.getOrganConstraint());
-		value.setOtherConstraint(aValue.getOtherConstraint());
-		value.setParallelismConstraint(aValue.getParallelismConstraint());
-		value.setTaxonConstraint(aValue.getTaxonConstraint());
-		value.setTo(aValue.getTo());
-		value.setToInclusive(aValue.getToInclusive());
-		value.setToUnit(aValue.getToUnit());
-		value.setToModifier(aValue.getToModifier());
-		value.setUpperRestricted(aValue.getUpperRestricted());
-		value.setUnit(aValue.getUnit());
-		value.setOntologyId(aValue.getOntologyId());
-		value.setProvenance(aValue.getProvenance());
-		value.setNotes(aValue.getNotes());
-		value.setValueOriginal(aValue.getValueOriginal());
-		value.setEstablishmentMeans(aValue.getEstablishmentMeans());
-		value.setSrc(aValue.getSrc());
-		value.setIsModifier(aValue.getIsModifier());
+	private ArrayList<CompleteValue> copyValues(Values values) {
+	
+		ArrayList<CompleteValue> completeValues = new ArrayList<CompleteValue>();
+		for(edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue: values.getAll()){			
+			
+			CompleteValue value = new CompleteValue();
+			value.setValue(aValue.getValue());
+			value.setModifier(aValue.getModifier());
+			value.setConstraint(aValue.getConstraint());
+			value.setConstraintId(aValue.getConstraintId());
+			value.setNegation(aValue.getNegation());
+			value.setType(aValue.getType());
+			value.setCharType(aValue.getCharType());
+			value.setFrom(aValue.getFrom());
+			value.setFromInclusive(aValue.getFromInclusive());
+			value.setFromUnit(aValue.getFromUnit());
+			value.setFromModifier(aValue.getFromModifier());
+			value.setGeographicalConstraint(aValue.getGeographicalConstraint());
+			value.setInBrackets(aValue.getInBrackets());
+			value.setOrganConstraint(aValue.getOrganConstraint());
+			value.setOtherConstraint(aValue.getOtherConstraint());
+			value.setParallelismConstraint(aValue.getParallelismConstraint());
+			value.setTaxonConstraint(aValue.getTaxonConstraint());
+			value.setTo(aValue.getTo());
+			value.setToInclusive(aValue.getToInclusive());
+			value.setToUnit(aValue.getToUnit());
+			value.setToModifier(aValue.getToModifier());
+			value.setUpperRestricted(aValue.getUpperRestricted());
+			value.setUnit(aValue.getUnit());
+			value.setOntologyId(aValue.getOntologyId());
+			value.setProvenance(aValue.getProvenance());
+			value.setNotes(aValue.getNotes());
+			value.setValueOriginal(aValue.getValueOriginal());
+			value.setEstablishmentMeans(aValue.getEstablishmentMeans());
+			value.setSrc(aValue.getSrc());
+			value.setIsModifier(new Boolean(aValue.getIsModifier()).toString());
 
-		return value;
+			completeValues.add(value);
+		}
+
+		return completeValues;
 	}
 
 	private String getMorphologyDescription(File file) throws JDOMException, IOException {
@@ -1160,7 +1170,6 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 	}
 	
 	private String getCSVMatrix(TaxonMatrix matrix) throws IOException {
-		//TODO: Add RankData authority and date
 		try(StringWriter stringWriter = new StringWriter()) {
 			try(CSVWriter writer = new CSVWriter(stringWriter)) {
 			
@@ -1176,7 +1185,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 					line = new String[matrix.getCharacterCount() + 1];
 					line[0] = getTaxonName(taxon);
 					
-					for(int j=1; j<matrix.getCharacterCount(); j++) {
+					for(int j=1; j<matrix.getCharacterCount()+1; j++) {
 						Character character = sortedArray.get(j - 1);
 						line[j] = matrix.getValue(taxon, character).toString();
 					}
@@ -1446,7 +1455,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		try{
 			MatrixGenerationService service = new MatrixGenerationService(null, null, null, null, null, null);
 			//create TaxonMatrix from a raw matrix output by matrixGeneration
-			TaxonMatrix matrix = service.createTaxonMatrix("C:/Users/hongcui/Documents/etcsite/data/matrixGeneration/21/matrix.ser", new Model(), false);
+			TaxonMatrix matrix = service.createTaxonMatrix("C:/Users/hongcui/Documents/etcsite/data/matrixGeneration/91/Matrix.ser", new Model(), false);
 			MatrixFileUtil matrixFileUtil = new MatrixFileUtil();
 			matrixFileUtil.generateSimpleCSV("C:/Users/hongcui/Documents/etc-development/matrices/simple.csv", matrix);
 			matrixFileUtil.generateMatrixConverterCSV("C:/Users/hongcui/Documents/etc-development/matrices/matrixconverter.csv", matrix);

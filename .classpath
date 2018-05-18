@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" output="target/etc-site-0.0.1-SNAPSHOT/WEB-INF/classes" path="src/main/java">
+	<classpathentry kind="src" output="${webapp}/WEB-INF/classes" path="src/main/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry excluding="**" kind="src" output="target/etc-site-0.0.1-SNAPSHOT/WEB-INF/classes" path="src/main/resources">
+	<classpathentry excluding="**" kind="src" output="${webapp}/WEB-INF/classes" path="src/main/resources">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
@@ -33,5 +33,22 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="output" path="target/etc-site-0.0.1-SNAPSHOT/WEB-INF/classes"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/gwt-user.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/gwt-codeserver.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/gwt-dev.jar">
+		<attributes>
+			<attribute name="javadoc_location" value="file:/C:/Program%20Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/doc/javadoc/"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/validation-api-1.0.0.GA.jar" sourcepath="C:/Program Files/eclipse-mars/plugins/com.gwtplugins.gwt.eclipse.sdkbundle.gwt28_2.8.0.201703272136/gwt-2.8.0/validation-api-1.0.0.GA-sources.jar"/>
+	<classpathentry kind="output" path="${webapp}/WEB-INF/classes"/>
 </classpath>

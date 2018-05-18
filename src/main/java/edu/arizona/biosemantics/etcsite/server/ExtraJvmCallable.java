@@ -224,7 +224,8 @@ public abstract class ExtraJvmCallable<T> implements Callable<T>, Task {
 	            BufferedReader br = new BufferedReader(isr);
 	            String line=null;
 	            while ( (line = br.readLine()) != null)
-	                System.out.println(type + ">" + line);    
+	            	log(LogLevel.DEBUG,
+							type + ">" + line);    
 	            } catch (IOException ioe)
 	              {
 	                ioe.printStackTrace();  

@@ -82,19 +82,19 @@
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-servlet</artifactId>
-			<version>${gwtVersion}</version>
+<!-- 			<version>${gwtVersion}</version> -->
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-user</artifactId>
-			<version>${gwtVersion}</version>
+<!-- 			<version>${gwtVersion}</version> -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>com.google.gwt</groupId>
 			<artifactId>gwt-dev</artifactId>
-			<version>${gwtVersion}</version>
+<!-- 			<version>${gwtVersion}</version> -->
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
@@ -119,13 +119,13 @@
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.etcsite</groupId>
 		  <artifactId>matrix-review</artifactId>
-		  <version>0.0.60-SNAPSHOT</version>
+		  <version>0.0.63-SNAPSHOT</version>
 		  <classifier>classes</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.etcsite</groupId>
 		  <artifactId>matrix-review</artifactId>
-		  <version>0.0.60-SNAPSHOT</version>
+		  <version>0.0.63-SNAPSHOT</version>
 		  <classifier>sources</classifier>
 		</dependency>
 		<dependency>
@@ -305,7 +305,7 @@
 		<dependency>
 			<groupId>edu.arizona.biosemantics.semanticmarkup</groupId>
 			<artifactId>semantic-markup</artifactId>
-			<version>0.1.197-SNAPSHOT</version>
+			<version>0.1.198-SNAPSHOT</version>
 			<exclusions>
 				<exclusion>
 					<artifactId>app</artifactId>
@@ -367,19 +367,25 @@
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.oto2</groupId>
 		  <artifactId>ontologize2</artifactId>
-		  <version>0.0.71-SNAPSHOT</version>
+		  <version>0.0.72-SNAPSHOT</version>
 		  <classifier>sources</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.oto2</groupId>
 		  <artifactId>ontologize2</artifactId>
-		  <version>0.0.71-SNAPSHOT</version>
+		  <version>0.0.72-SNAPSHOT</version>
 		  <classifier>classes</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.matrixgeneration</groupId>
 		  <artifactId>matrix-generation</artifactId>
-		  <version>0.1.70-SNAPSHOT</version>
+		  <version>0.1.72-SNAPSHOT</version>
+		  <classifier>sources</classifier>
+		</dependency>
+		<dependency>
+		  <groupId>edu.arizona.biosemantics.matrixgeneration</groupId>
+		  <artifactId>matrix-generation</artifactId>
+		  <version>0.1.72-SNAPSHOT</version>
 		  <exclusions>
 		  	<exclusion>
 		  		<artifactId>owlapi-tools</artifactId>
@@ -553,12 +559,12 @@
 		<dependency>
 			<groupId>edu.arizona.biosemantics.common</groupId>
 			<artifactId>log</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.5-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.arizona.biosemantics.common</groupId>
 			<artifactId>log</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
+			<version>0.0.5-SNAPSHOT</version>
 			<classifier>sources</classifier>
 		</dependency>
 		<dependency>
@@ -616,12 +622,12 @@
 		<dependency>
 			<groupId>edu.arizona.biosemantics.euler</groupId>
 			<artifactId>euler2</artifactId>
-			<version>0.0.15-SNAPSHOT</version>
+			<version>0.0.16-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.arizona.biosemantics.euler</groupId>
 			<artifactId>euler2</artifactId>
-			<version>0.0.15-SNAPSHOT</version>
+			<version>0.0.16-SNAPSHOT</version>
 		  	<classifier>sources</classifier>
 		</dependency>
 		<dependency>
@@ -632,13 +638,13 @@
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.euler</groupId>
 		  <artifactId>alignment</artifactId>
-		  <version>0.0.83-SNAPSHOT</version>
+		  <version>0.0.85-SNAPSHOT</version>
 		  <classifier>sources</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.euler</groupId>
 		  <artifactId>alignment</artifactId>
-		  <version>0.0.83-SNAPSHOT</version>
+		  <version>0.0.85-SNAPSHOT</version>
 		  <classifier>classes</classifier>
 		</dependency>
 		<dependency>
@@ -666,7 +672,7 @@
 		  <groupId>edu.arizona.biosemantics.micropie</groupId>
 		  <artifactId>micropie</artifactId>
 		  <version>0.1.9-SNAPSHOT</version>
-		  <exclusions>
+			<exclusions>
 		  	<exclusion>
 		  		<artifactId>stanford-corenlp</artifactId>
 		  		<groupId>edu.stanford.nlp</groupId>
@@ -691,7 +697,7 @@
 
 	<build>
 		<!-- Generate compiled stuff in the folder used for developing mode -->
-		<outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+		<outputDirectory>${webapp}/WEB-INF/classes</outputDirectory>
 
 		<plugins>
 			<!-- Mojo's Maven GWT Plugin -->
@@ -726,6 +732,7 @@
 						<configuration>
 			              <extraJvmArgs>-Xmx4096M -Dgwt.jjs.permutationWorkerFactory=com.google.gwt.dev.ThreadedPermutationWorkerFactory</extraJvmArgs>
 			              <localWorkers>5</localWorkers>
+<!-- 			              <logLevel>DEBUG</logLevel> -->
 			            </configuration>
 						<goals>
 							<goal>compile</goal>
@@ -738,7 +745,8 @@
 				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
 					documentation at codehaus.org -->
 				<configuration>
-				    <logLevel>INFO</logLevel>
+<!-- 				    <logLevel>DEBUG</logLevel> -->
+                    <logLevel>INFO</logLevel>
 					<runTarget>index.html</runTarget>
 					<hostedWebapp>${webappDirectory}</hostedWebapp>
 					<!--<i18nMessagesBundle>edu.arizona.biosemantics.etcsite.client.Messages</i18nMessagesBundle> -->
