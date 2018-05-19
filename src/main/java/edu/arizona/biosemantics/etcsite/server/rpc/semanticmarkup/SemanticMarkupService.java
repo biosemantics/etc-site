@@ -386,7 +386,6 @@ public class SemanticMarkupService extends RemoteServiceServlet implements ISema
 			
 			final Parse finalParse = parse;
 			
-			//final Parse parse = new InJvmParse(taxonGroup, useEmptyGlossary, input, tablePrefix, source, operator);
 			activeParses.put(config.getConfiguration().getId(), parse);
 			final ListenableFuture<ParseResult> futureResult = executorService.submit(parse);
 			try {

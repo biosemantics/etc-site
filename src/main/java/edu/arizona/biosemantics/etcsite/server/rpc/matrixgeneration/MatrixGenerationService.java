@@ -339,7 +339,6 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		
 		final String enhanceDir = this.getTempDir(task) + File.separator + "enhance";
 		final Enhance enhance = new ExtraJvmEnhance(input, enhanceDir, ontologyFiles, categoryTerm, synonym, taxonGroup);
-		//Don't use InJvm this because of owlapi dependency problem
 		//final Enhance enhance = new InJvmEnhance(input, enhanceDir, ontologyFiles, categoryTerm, synonym, taxonGroup);
 	
 		activeEnhanceProcess.put(config.getConfiguration().getId(), enhance);
@@ -460,7 +459,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		boolean inheritValues = config.isInheritValues();
 		boolean generateAbsentPresent = config.isGenerateAbsentPresent();
 		////System.out.println(taxonGroup+"--"+"doMatrixGeneration");
-		//because etc-site and matrix generation uses different versions of OWLAPI, always use ExtraJvm for local and server.
+		
 		final MatrixGeneration matrixGeneration = new ExtraJvmMatrixGeneration(inputDir, taxonGroup, 
 		outputFile, inheritValues, generateAbsentPresent, true);
 		//final MatrixGeneration matrixGeneration = new InJvmMatrixGeneration(inputDir, taxonGroup, 
@@ -990,9 +989,11 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		    		Value v = new Value(value);*/
 		    		String value = cellValue.getText();
 		    		Values values = cellValue.getSource(); //multiple values of a character:fusion = distinct|united
+		    		log(LogLevel.DEBUG, "value is "+value);
 		    		//check represenative value:the first value in values 
 		    		//edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue = values.getRepresentative(); 
-		    		ArrayList<CompleteValue> completeValues = copyValues(values);
+		    		ArrayList<CompleteValue> completeValues = new ArrayList<CompleteValue> ();
+		    		if(!value.isEmpty())completeValues = copyValues(values);
 		    		Value v = new Value(value, completeValues);
 		    		
 
@@ -1066,7 +1067,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 	
 		ArrayList<CompleteValue> completeValues = new ArrayList<CompleteValue>();
 		for(edu.arizona.biosemantics.matrixgeneration.model.complete.Value aValue: values.getAll()){			
-			
+			if(aValue==null) return completeValues;
 			CompleteValue value = new CompleteValue();
 			value.setValue(aValue.getValue());
 			value.setModifier(aValue.getModifier());
