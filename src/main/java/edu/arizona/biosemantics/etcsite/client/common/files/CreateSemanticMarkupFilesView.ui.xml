@@ -421,7 +421,7 @@
 <!-- 								<g:FlowPanel> -->
 									<g:Label>If copy/paste from another source, check word by word
 										(especially special symbols) that the content is copied correctly.</g:Label>
-									<g:Label>Do not include any HTML or XML tag in the text.</g:Label>
+									<g:Label>Do not include any backslash, HTML or XML tag in the text.</g:Label>
 									<g:Grid>
 										<g:row>
 									    	 <g:customCell>
