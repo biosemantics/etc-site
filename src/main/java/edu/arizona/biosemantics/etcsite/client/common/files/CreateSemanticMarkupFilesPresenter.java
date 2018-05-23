@@ -218,7 +218,7 @@ public class CreateSemanticMarkupFilesPresenter implements ICreateSemanticMarkup
 		textBuilder.append("year: " + (view.getPYear().trim()) + "\n");
 		textBuilder.append("title: " + (view.getPTitleText().trim()) + "\n");
 		textBuilder.append("doi: " + (view.getPDOI().trim())  + "\n");
-		textBuilder.append("full citation: " + (view.getPFullCitation().trim()) + "\n");
+		textBuilder.append("full citation: " + (view.getPFullCitation().trim()) + "\n"); String x = "";
 		List<TaxonIdentificationEntry> taxonIdentificationEntries = view.getPTaxonIdentificationEntries();
 	
 		for(TaxonIdentificationEntry taxonIdentificationEntry : taxonIdentificationEntries) {

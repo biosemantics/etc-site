@@ -15,10 +15,17 @@ public class ExtraJvmMicropieParse extends ExtraJvmCallable<ParseResult> impleme
 	public static class MainWrapper {
 		
 		public static void main(String[] args) {
+//			args = new String[]{"-i","C:/Users/hongcui/Documents/etcsite/data/users/1/MicroPIE",
+//					"-o","C:/Users/hongcui/Documents/etcsite/data/textCapture/charaparser/126/out", 
+//					"-m","C:/Users/hongcui/Documents/etcsite/resources/textCapture/micropie/models",
+//					"-f","xml"};
 			try {
 				edu.arizona.biosemantics.micropie.Main.main(args);
+				System.out.println("micropie main runs");
 			} catch (Throwable t) {
-				System.exit(-1);
+				System.out.println("micropie failed");
+				t.printStackTrace();
+			    System.exit(-1);
 			}
 		}
 	}
@@ -80,9 +87,8 @@ public class ExtraJvmMicropieParse extends ExtraJvmCallable<ParseResult> impleme
 				"C:/etcsitebase/etcsite/data/textCapture/charaparser/352/out", 
 				"C:/etcsitebase/etcsite/resources/textCapture/micropie/models");
 		*/
-		ExtraJvmMicropieParse parse = new ExtraJvmMicropieParse("C:/etcsitebase/etcsite/data/users/4/smicropie_demo", 
-		"C:/etcsitebase/etcsite/data/textCapture/charaparser/352/out", 
-		"C:/etcsitebase/etcsite/resources/textCapture/micropie/models");
+		ExtraJvmMicropieParse parse = new ExtraJvmMicropieParse("C:/Users/hongcui/Documents/etcsite/data/users/1/MicroPIE",
+				"C:/Users/hongcui/Documents/etcsite/data/textCapture/charaparser/126/out", "C:/Users/hongcui/Documents/etcsite/resources/textCapture/micropie/models");
 		parse.call();
 	}
 

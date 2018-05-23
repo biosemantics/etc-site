@@ -49,7 +49,7 @@ import com.sencha.gxt.widget.core.client.menu.MenuItem;
 import edu.arizona.biosemantics.common.log.LogLevel;
 import edu.arizona.biosemantics.common.taxonomy.Description;
 import edu.arizona.biosemantics.common.taxonomy.Rank;
-import edu.arizona.biosemantics.common.taxonomy.SimpleRank;
+//import edu.arizona.biosemantics.common.taxonomy.SimpleRank;
 import edu.arizona.biosemantics.etcsite.client.common.Alerter;
 import edu.arizona.biosemantics.etcsite.shared.model.file.DescriptionEntry;
 import edu.arizona.biosemantics.etcsite.shared.model.file.TaxonIdentificationEntry;
@@ -180,7 +180,7 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 	Grid PranksGrid;
 		
 	@UiField(provided=true)
-	ComboBox<SimpleRank> PranksCombo;
+	ComboBox<Rank> PranksCombo;
 	
 	@UiField
 	Button PdeleteRankButton;
@@ -276,24 +276,25 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 	    ranksCombo.setTriggerAction(TriggerAction.ALL);
 	    ranksCombo.setValue(Rank.DOMAIN);
 	    
-	    ListStore<SimpleRank> Pstore = new ListStore<SimpleRank>(new ModelKeyProvider<SimpleRank>() {
+	    //TODO: replace Rank with SimpleRank
+	    ListStore<Rank> Pstore = new ListStore<Rank>(new ModelKeyProvider<Rank>() {
 			@Override
-			public String getKey(SimpleRank item) {
+			public String getKey(Rank item) {
 				return String.valueOf(item.getId());
 			}
 	    });
-	    Pstore.addAll(Arrays.asList(SimpleRank.values()));
+	    Pstore.addAll(Arrays.asList(Rank.values()));
 	    
-	    PranksCombo = new ComboBox<SimpleRank>(Pstore, new LabelProvider<SimpleRank>() {
+	    PranksCombo = new ComboBox<Rank>(Pstore, new LabelProvider<Rank>() {
 			@Override
-			public String getLabel(SimpleRank item) {
+			public String getLabel(Rank item) {
 				return item.name();
 			}
 	    });
 	    PranksCombo.setAllowBlank(false);
 	    PranksCombo.setForceSelection(true);
 	    PranksCombo.setTriggerAction(TriggerAction.ALL);
-	    PranksCombo.setValue(SimpleRank.GENUS);
+	    PranksCombo.setValue(Rank.GENUS);
 		
 	    ListStore<Description> descStore = new ListStore<Description>(new ModelKeyProvider<Description>() {
 			@Override
@@ -509,7 +510,7 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 		    //PranksGrid.remove(authorityDateButton);
 		    PranksGrid.setWidget(newRow, 0, PranksCombo);
 		    PranksGrid.setWidget(newRow, 1, new TextBox());
-		    PranksCombo.setValue(SimpleRank.values()[PranksCombo.getValue().getId() + 1]);
+		    PranksCombo.setValue(Rank.values()[PranksCombo.getValue().getId() + 1]);
 		    //PranksGrid.setWidget(newRow, 2, authorityDateButton);
 		    //authorityDateButton.setVisible(true);	
 		}
@@ -699,9 +700,9 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 	
 	public List<TaxonIdentificationEntry> getPTaxonIdentificationEntries() {
 		List<TaxonIdentificationEntry> result = new LinkedList<TaxonIdentificationEntry>();
-		if(PranksGrid.getRowCount() <= 2) 
+		if(PranksGrid.getRowCount() <= 2) //header row and button row
 			return result;
-		//System.out.println(PranksGrid.getRowCount());
+		System.out.println(PranksGrid.getRowCount());
 		for(int i = 1; i <= PranksGrid.getRowCount() - 2; i++){ //row 0 is the header row, also there is a button at the end of table
 			Widget rankWidget = PranksGrid.getWidget(i, 0);
 			Widget valueWidget = PranksGrid.getWidget(i, 1);
@@ -712,14 +713,17 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 				ComboBox<Rank> rankBox = (ComboBox<Rank>)rankWidget;
 				//String rank = rankBox.getItemText(rankBox.getSelectedIndex());
 				rank = rankBox.getValue();
+				System.out.println("rank:"+rank);
 			}
 			if(rankWidget instanceof Label) {
 				Label rankLabel = (Label)rankWidget;
 				rank = Rank.valueOf(rankLabel.getText());
+				System.out.println("rank:"+rank);
 			}
 			if(valueWidget instanceof TextBox) {
 				TextBox valueBox = (TextBox)valueWidget;
 				String value = valueBox.getText().trim();
+				System.out.println("rank:"+rank);
 				if(rank != null)
 					result.add(new TaxonIdentificationEntry(rank, value));
 			}
@@ -833,7 +837,7 @@ public class CreateSemanticMarkupFilesView extends Composite implements ICreateS
 		while(PranksGrid.getRowCount() > 3) {
 			PranksGrid.removeRow(ranksGrid.getRowCount() - 2);
 		}
-		PranksCombo.setValue(SimpleRank.GENUS);
+		PranksCombo.setValue(Rank.GENUS);
 		PranksGrid.setWidget(1, 0, PranksCombo);
 		PranksGrid.setWidget(1, 1,new TextBox());
 		PranksGrid.setWidget(1, 2, deleteRankButton);
