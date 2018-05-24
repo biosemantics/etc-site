@@ -72,6 +72,7 @@ import edu.arizona.biosemantics.semanticmarkup.enhance.transform.SplitCompoundBi
 import edu.arizona.biosemantics.semanticmarkup.enhance.transform.SplitCompoundBiologicalEntity;
 import edu.arizona.biosemantics.semanticmarkup.enhance.transform.StandardizeCount;
 import edu.arizona.biosemantics.semanticmarkup.enhance.transform.StandardizeQuantityPresence;
+import edu.arizona.biosemantics.semanticmarkup.enhance.transform.StandardizeUnits;
 import edu.arizona.biosemantics.semanticmarkup.enhance.transform.old.MoveCharacterToStructureConstraint;
 import edu.arizona.biosemantics.semanticmarkup.enhance.transform.old.StandardizeStructureNameBySyntax;
 import edu.arizona.biosemantics.semanticmarkup.enhance.transform.old.StandardizeTerminology;
@@ -209,10 +210,12 @@ public class EnhanceRun {
 		run.addTransformer(new StandardizeTerminology(characterKnowledgeBase));
 		run.addTransformer(new RemoveOrphanRelations());
 		run.addTransformer(new RemoveDuplicateValues());
+		run.addTransformer(new StandardizeUnits());
 		run.addTransformer(new CollapseBiologicalEntityToName());
 		run.addTransformer(new CollapseCharacterToValue());
 		run.addTransformer(new CollapseBiologicalEntities());
 		run.addTransformer(new CollapseCharacters());
+
 		
 		run.run(new File(input), new File(output));
 	}
