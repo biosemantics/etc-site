@@ -64,8 +64,15 @@ public class InJvmEnhance implements Enhance {
 	/**/
 	public static void main(String[] args) throws Exception {
 		//MatrixGeneration mg = new MatrixGeneration("C:/test/users/1070/input_2", "C:/test/temp/matrixGeneration/124/Matrix.mx");
-		InJvmEnhance mg = new InJvmEnhance("C:/etcsitebase/etcsite/data/users/4/smicropie_demo_output_by_TC_task_micropiedemo", "C:/test/Test_mmm.mx", "",
-				"", "", "PROKARYOTES");
+		//InJvmEnhance mg = new InJvmEnhance("C:/etcsitebase/etcsite/data/users/4/smicropie_demo_output_by_TC_task_micropiedemo", "C:/test/Test_mmm.mx", "",
+		//		"", "", "PROKARYOTES");
+		String inputDir= "C:/Users/hongcui/Lorena/Farjon_parsed0712_hong_local_parse";
+		String outputDir="C:/Users/hongcui/Lorena/Farjon_parsed0712_hong_local_parse_enhance";
+		String inputOntology=""; 
+		String termReviewTermCategorization="C:/Users/hongcui/Lorena/category_term-task-Farjon.csv";
+		String termReviewSynonyms="C:/Users/hongcui/Lorena/category_mainterm_synonymterm-task-Farjon.csv";
+		String taxonGroup = "PLANT";
+		InJvmEnhance mg = new InJvmEnhance(inputDir, outputDir, inputOntology, termReviewTermCategorization, termReviewSynonyms, taxonGroup);
 		mg.call();
 		
 	}

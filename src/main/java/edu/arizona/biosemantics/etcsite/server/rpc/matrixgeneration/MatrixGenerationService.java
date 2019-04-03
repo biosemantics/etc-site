@@ -1453,7 +1453,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 				writer.write(rawMatrix);
 		 }*/
 		//test TaxonMatrix output formats: keep this 
-		try{
+		/*try{
 			MatrixGenerationService service = new MatrixGenerationService(null, null, null, null, null, null);
 			//create TaxonMatrix from a raw matrix output by matrixGeneration
 			TaxonMatrix matrix = service.createTaxonMatrix("C:/Users/hongcui/Documents/etcsite/data/matrixGeneration/91/Matrix.ser", new Model(), false);
@@ -1464,8 +1464,23 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 
 		} catch(Exception e) {
 			e.printStackTrace();
-		}
+		}*/
 		 
+		try{
+			MatrixGenerationService service = new MatrixGenerationService(null, null, null, null, null, null);
+			//create TaxonMatrix from a raw matrix output by matrixGeneration
+			/*TaxonMatrix matrix = service.createTaxonMatrix("C:/Users/hongcui/Lorena/Farjon_Matrix_etc_site/Farjon_matrix_local_enhance_mg_no_inference_no_inheritance.ser", new Model(), false);
+			MatrixFileUtil matrixFileUtil = new MatrixFileUtil();
+			matrixFileUtil.generateSimpleCSV("C:/Users/hongcui/Lorena/Farjon_Matrix_etc_site/Farjon_matrix_local_enhance_mgs_no_inference_no_inheritance.csv", matrix);
+			matrixFileUtil.generateMatrixConverterCSV("C:/Users/hongcui/Lorena/Farjon_Matrix_etc_site/Farjon_matrix_local_enhance_mgs_no_inference_no_inheritance_converter.csv", matrix);
+			matrixFileUtil.generateSimpleCSVwithSentences("C:/Users/hongcui/Lorena/Farjon_Matrix_etc_site/Farjon_matrixsentences.csv", matrix);
+			 */
+			TaxonMatrix matrix = service.createTaxonMatrix("C:/Users/hongcui/Documents/research/AuthorOntology/Data/Descriptions and Parsing/Carex_from_FNA_no_Keys_Term_Reviewed/matrix.ser", new Model(), false);
+			MatrixFileUtil matrixFileUtil = new MatrixFileUtil();
+			matrixFileUtil.generateSimpleCSVwithSentences("C:/Users/hongcui/Documents/research/AuthorOntology/Data/Descriptions and Parsing/Carex_from_FNA_no_Keys_Term_Reviewed_no_infer_no_inher_w_sents.csv", matrix);
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 		 
 	}
 }

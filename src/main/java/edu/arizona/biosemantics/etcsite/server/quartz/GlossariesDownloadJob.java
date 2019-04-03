@@ -32,14 +32,16 @@ public class GlossariesDownloadJob  implements Job {
 	}
 
 	public void saveGlossaryDownloads() {
-		Client oto2Client = new Client(edu.arizona.biosemantics.etcsite.server.Configuration.oto2Url);
+		//with the manual procedure started in Jan 2019, this is no longer needed
+		//Fetch glossary from OTO regularly and save .ser on the etc server
+		/*Client oto2Client = new Client(edu.arizona.biosemantics.etcsite.server.Configuration.oto2Url);
 		////System.out.println("otoUrl="+edu.arizona.biosemantics.semanticmarkup.config.Configuration.otoUrl);
 		OTOClient otoClient = new OTOClient(edu.arizona.biosemantics.semanticmarkup.config.Configuration.otoUrl);
 		
 		oto2Client.open();
 		otoClient.open();
 		for(TaxonGroup taxonGroup : TaxonGroup.values()) {
-			//store a default to have something
+			//store a default to have something in place
 			Download communityDownload = new Download(false, new ArrayList<Decision>(), new ArrayList<Synonym>());
 			storeToLocalCommunityDownload(communityDownload, taxonGroup);
 			
@@ -68,7 +70,7 @@ public class GlossariesDownloadJob  implements Job {
 			}
 		}
 		oto2Client.close();
-		otoClient.close();
+		otoClient.close();*/
 	}
 
 	private void storeToLocalGlossaryDownload(GlossaryDownload glossaryDownload, TaxonGroup taxonGroup) {
@@ -91,7 +93,7 @@ public class GlossariesDownloadJob  implements Job {
 			out.writeObject(communityDownload);
 		    out.close();
 		} catch(Exception e) {
-			log(LogLevel.ERROR, "Couldn't store glossaryDownload locally", e);
+			log(LogLevel.ERROR, "Couldn't store communityDownload locally", e);
 		}
 	}
 }

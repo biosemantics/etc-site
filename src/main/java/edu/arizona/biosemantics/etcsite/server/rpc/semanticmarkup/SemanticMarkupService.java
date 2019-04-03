@@ -99,7 +99,7 @@ public class SemanticMarkupService extends RemoteServiceServlet implements ISema
 	private DAOManager daoManager;
 	private Emailer emailer;
 	private ICollectionService otoCollectionService;
-	private ToOTOSender2 otoSender;
+	private ToOTOSender2 otoSender; //not functioning until OTO is restored, noted Jan 2019.
 	
 	@Inject
 	public SemanticMarkupService(ICollectionService collectionService, IFileAccessService fileAccessService, IFileService fileService, 

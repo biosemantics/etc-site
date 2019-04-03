@@ -1,8 +1,10 @@
 package edu.arizona.biosemantics.etcsite.server.enhance;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -74,7 +76,7 @@ import edu.arizona.biosemantics.semanticmarkup.enhance.transform.old.Standardize
 
 public class MinimalEnhanceRun {
 
-	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException, OWLOntologyCreationException {
+	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException, ClassNotFoundException, OWLOntologyCreationException {
 		String inputDir = "C:/Users/rodenhausen.CATNET/Downloads/0_output_by_TC_task_pepepeppe";
 		//String inputDir = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/0_output_by_TC_task_2";
 		String enhanceDir = "C:/Users/rodenhausen.CATNET/Downloads/0_output_by_TC_task_pepepeppe/enhance";
@@ -106,7 +108,7 @@ public class MinimalEnhanceRun {
 	private String input;
 	private String output;
 	
-	public MinimalEnhanceRun(String input, String output, TaxonGroup taxonGroup) throws IOException, InterruptedException, ExecutionException {
+	public MinimalEnhanceRun(String input, String output, TaxonGroup taxonGroup) throws IOException, InterruptedException, ClassNotFoundException, ExecutionException {
 		this.input = input;
 		this.output = output;
 		this.taxonGroup = taxonGroup;
@@ -170,7 +172,7 @@ public class MinimalEnhanceRun {
 		return set;
 	}
 
-	private void initGlossary(IGlossary glossary, IInflector inflector, TaxonGroup taxonGroup) throws IOException, InterruptedException, ExecutionException {
+	private void initGlossary(IGlossary glossary, IInflector inflector, TaxonGroup taxonGroup) throws ClassNotFoundException, IOException, InterruptedException, ExecutionException {
 		addPermanentGlossary(glossary, inflector, taxonGroup);
 	}
 
@@ -250,14 +252,19 @@ public class MinimalEnhanceRun {
 		}
 	}
 
-	private void addPermanentGlossary(IGlossary glossary, IInflector inflector, TaxonGroup taxonGroup) throws InterruptedException, ExecutionException {
-		OTOClient otoClient = new OTOClient("http://biosemantics.arizona.edu:8080/OTO");
+	private void addPermanentGlossary(IGlossary glossary, IInflector inflector, TaxonGroup taxonGroup) throws InterruptedException,IOException, ClassNotFoundException, ExecutionException {
+		/*OTOClient otoClient = new OTOClient("http://biosemantics.arizona.edu:8080/OTO");
 		GlossaryDownload glossaryDownload = new GlossaryDownload();		
 		String glossaryVersion = "latest";
 		otoClient.open();
 		Future<GlossaryDownload> futureGlossaryDownload = otoClient.getGlossaryDownload(taxonGroup.getDisplayName(), glossaryVersion);
 		glossaryDownload = futureGlossaryDownload.get();
-		otoClient.close();
+		otoClient.close();*/
+		
+		ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(Configuration.glossariesDownloadDirectory + File.separator +
+				"GlossaryDownload." + taxonGroup.getDisplayName() + ".ser"));
+		GlossaryDownload glossaryDownload = (GlossaryDownload) objectIn.readObject();
+		objectIn.close();
 				
 		//add the syn set of the glossary
 		HashSet<Term> gsyns = new HashSet<Term>();

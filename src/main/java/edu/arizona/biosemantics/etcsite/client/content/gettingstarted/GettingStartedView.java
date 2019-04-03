@@ -1,6 +1,7 @@
 package edu.arizona.biosemantics.etcsite.client.content.gettingstarted;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.ObjectElement;
 import com.google.gwt.dom.client.ParamElement;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -91,6 +92,46 @@ public class GettingStartedView extends Composite implements IGettingStartedView
 	@UiField
 	ParamElement baseParamElement4;
 	
+	@UiField
+	ObjectElement objectElement5;
+	@UiField
+	ParamElement movieParamElement5;
+	@UiField
+	ParamElement qualityParamElement5;
+	@UiField
+	ParamElement bgColorParamElement5;
+	@UiField
+	ParamElement flashVarsParamElement5;
+	@UiField
+	ParamElement allowFullScreenParamElement5;
+	@UiField
+	ParamElement scaleParamElement5;
+	@UiField
+	ParamElement allowScriptAccessParamElement5;
+	@UiField
+	ParamElement baseParamElement5;
+	
+	
+	
+	@UiField
+	ObjectElement objectElement6;
+	@UiField
+	ParamElement movieParamElement6;
+	@UiField
+	ParamElement qualityParamElement6;
+	@UiField
+	ParamElement bgColorParamElement6;
+	@UiField
+	ParamElement flashVarsParamElement6;
+	@UiField
+	ParamElement allowFullScreenParamElement6;
+	@UiField
+	ParamElement scaleParamElement6;
+	@UiField
+	ParamElement allowScriptAccessParamElement6;
+	@UiField
+	ParamElement baseParamElement6;
+	
 	interface GettingStartedViewUiBinder extends UiBinder<Widget, GettingStartedView> {
 	}
 
@@ -166,6 +207,41 @@ public class GettingStartedView extends Composite implements IGettingStartedView
         scaleParamElement4.setValue("showall");
         allowScriptAccessParamElement4.setValue("always");
         baseParamElement4.setValue("http://content.screencast.com/users/thomas.rodenhausen/folders/Jing/media/9209f3fd-5d9c-4039-9f4f-013f0b019232/");
+
+		objectElement5.setId("scPlayer");
+        objectElement5.setClassName("embeddedObject");
+        objectElement5.setWidth("800");
+        objectElement5.setHeight("400");
+        objectElement5.setData("https://content.screencast.com/users/hongcui/folders/Jing/media/09ef2edc-f442-4466-b6f7-a7a37d42a473/jingswfplayer.swf");
+        objectElement5.setType("application/x-shockwave-flash");
+ 		
+        movieParamElement5.setValue("https://content.screencast.com/users/hongcui/folders/Jing/media/09ef2edc-f442-4466-b6f7-a7a37d42a473/jingswfplayer.swf");
+        qualityParamElement5.setValue("high");
+        bgColorParamElement5.setValue("#FFFFFF");
+        flashVarsParamElement5.setValue("thumb=https://content.screencast.com/users/hongcui/folders/Jing/media/09ef2edc-f442-4466-b6f7-a7a37d42a473/FirstFrame.jpg&containerwidth=1926&containerheight=869&content=https://content.screencast.com/users/hongcui/folders/Jing/media/09ef2edc-f442-4466-b6f7-a7a37d42a473/OntologyBuilding%20I.swf&blurover=false");
+        allowFullScreenParamElement5.setValue("true");
+        scaleParamElement5.setValue("showall");
+        allowScriptAccessParamElement5.setValue("always");
+        baseParamElement5.setValue("https://content.screencast.com/users/hongcui/folders/Jing/media/09ef2edc-f442-4466-b6f7-a7a37d42a473/");
+
+        objectElement6.setId("scPlayer");
+        objectElement6.setClassName("embeddedObject");
+        objectElement6.setWidth("800");
+        objectElement6.setHeight("400");
+        objectElement6.setData("https://content.screencast.com/users/hongcui/folders/Jing/media/a20af67a-729f-45f8-bb9f-4438f3686a0c/jingswfplayer.swf");
+        objectElement6.setType("application/x-shockwave-flash");
+ 		
+        movieParamElement6.setValue("https://content.screencast.com/users/hongcui/folders/Jing/media/a20af67a-729f-45f8-bb9f-4438f3686a0c/jingswfplayer.swf");
+        qualityParamElement6.setValue("high");
+        bgColorParamElement6.setValue("#FFFFFF");
+        flashVarsParamElement6.setValue("thumb=https://content.screencast.com/users/hongcui/folders/Jing/media/a20af67a-729f-45f8-bb9f-4438f3686a0c/FirstFrame.jpg&containerwidth=1920&containerheight=866&content=https://content.screencast.com/users/hongcui/folders/Jing/media/a20af67a-729f-45f8-bb9f-4438f3686a0c/OntologyBuilding%20II.swf&blurover=false");
+        allowFullScreenParamElement6.setValue("true");
+        scaleParamElement6.setValue("showall");
+        allowScriptAccessParamElement6.setValue("always");
+        baseParamElement6.setValue("https://content.screencast.com/users/hongcui/folders/Jing/media/a20af67a-729f-45f8-bb9f-4438f3686a0c/");
+
+	
+        
 	}
 
 	@Override

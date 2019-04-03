@@ -143,6 +143,28 @@
 						<param ui:field="allowScriptAccessParamElement4" name="allowScriptAccess" />
 						<param ui:field="baseParamElement4" name="base" />
 					</object>
+					<div style="font-weight: bold">Ontology Building I: Basic Features</div>
+					<object ui:field="objectElement5">
+						<param ui:field="movieParamElement5" name="movie" />
+						<param ui:field="qualityParamElement5" name="quality" />
+						<param ui:field="bgColorParamElement5" name="bgcolor" />
+						<param ui:field="flashVarsParamElement5" name="flashVars" />
+						<param ui:field="allowFullScreenParamElement5" name="allowFullScreen" />
+						<param ui:field="scaleParamElement5" name="scale" />
+						<param ui:field="allowScriptAccessParamElement5" name="allowScriptAccess" />
+						<param ui:field="baseParamElement5" name="base" />
+					</object>
+						<div style="font-weight: bold">Ontology Building II: Tree Views, Output, and Ontology Building Task</div>
+					<object ui:field="objectElement6">
+						<param ui:field="movieParamElement6" name="movie" />
+						<param ui:field="qualityParamElement6" name="quality" />
+						<param ui:field="bgColorParamElement6" name="bgcolor" />
+						<param ui:field="flashVarsParamElement6" name="flashVars" />
+						<param ui:field="allowFullScreenParamElement6" name="allowFullScreen" />
+						<param ui:field="scaleParamElement6" name="scale" />
+						<param ui:field="allowScriptAccessParamElement6" name="allowScriptAccess" />
+						<param ui:field="baseParamElement6" name="base" />
+					</object>
 				</g:HTMLPanel>
 			</g:HTMLPanel>
 		</lay:CenteredContentPanel>

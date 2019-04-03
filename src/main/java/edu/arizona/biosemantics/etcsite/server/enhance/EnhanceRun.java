@@ -1,8 +1,10 @@
 package edu.arizona.biosemantics.etcsite.server.enhance;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -79,7 +81,7 @@ import edu.arizona.biosemantics.semanticmarkup.enhance.transform.old.Standardize
 
 public class EnhanceRun {
 
-	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException, OWLOntologyCreationException {
+	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException, ClassNotFoundException, OWLOntologyCreationException {
 		//String inputDir = "C:/etcsitebase/etcsite/data/users/4/plant_output_by_TC_task_Plant3files_07-03-2017_1";
 		//String enhanceDir = "C:/etcsitebase/etcsite/data/matrixGeneration/432/enhance";
 		//String inputOntology = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_output_by_TC_task_2_output_by_OB_task_3/3.owl";
@@ -130,7 +132,7 @@ public class EnhanceRun {
 	private String termReviewSynonyms;
 	
 	public EnhanceRun(String input, String output, List<String> filePath2KnowsPartOf, 
-			String termReviewTermCategorization, String termReviewSynonyms, TaxonGroup taxonGroup) throws IOException, InterruptedException, ExecutionException {
+			String termReviewTermCategorization, String termReviewSynonyms, TaxonGroup taxonGroup) throws IOException, ClassNotFoundException, InterruptedException, ExecutionException {
 		this.input = input;
 		this.output = output;
 		this.filePath2KnowsPartOf = filePath2KnowsPartOf;
@@ -230,7 +232,7 @@ public class EnhanceRun {
 		return set;
 	}
 
-	private void initGlossary(IGlossary glossary, IInflector inflector, TaxonGroup taxonGroup, String termReviewTermCategorization, String termReviewSynonyms) throws IOException, InterruptedException, ExecutionException {
+	private void initGlossary(IGlossary glossary, IInflector inflector, TaxonGroup taxonGroup, String termReviewTermCategorization, String termReviewSynonyms) throws IOException, ClassNotFoundException, InterruptedException, ExecutionException {
 		addPermanentGlossary(glossary, inflector, taxonGroup);
 		addTermReviewGlossary(glossary, inflector, termReviewTermCategorization, termReviewSynonyms);
 	}
@@ -311,15 +313,20 @@ public class EnhanceRun {
 		}
 	}
 
-	private void addPermanentGlossary(IGlossary glossary, IInflector inflector, TaxonGroup taxonGroup) throws InterruptedException, ExecutionException {
-		OTOClient otoClient = new OTOClient("http://biosemantics.arizona.edu:8080/OTO");
+	private void addPermanentGlossary(IGlossary glossary, IInflector inflector, TaxonGroup taxonGroup) throws InterruptedException,IOException, ClassNotFoundException, ExecutionException {
+		/*OTOClient otoClient = new OTOClient("http://biosemantics.arizona.edu:8080/OTO");
 		GlossaryDownload glossaryDownload = new GlossaryDownload();		
 		String glossaryVersion = "latest";
 		otoClient.open();
 		Future<GlossaryDownload> futureGlossaryDownload = otoClient.getGlossaryDownload(taxonGroup.getDisplayName(), glossaryVersion);
 		glossaryDownload = futureGlossaryDownload.get();
-		otoClient.close();
+		otoClient.close();*/
 				
+		ObjectInputStream objectIn = new ObjectInputStream(new FileInputStream(Configuration.glossariesDownloadDirectory + File.separator +
+				"GlossaryDownload." + taxonGroup.getDisplayName() + ".ser"));
+		GlossaryDownload glossaryDownload = (GlossaryDownload) objectIn.readObject();
+		objectIn.close();
+		
 		//add the syn set of the glossary
 		HashSet<Term> gsyns = new HashSet<Term>();
 		for(TermSynonym termSyn : glossaryDownload.getTermSynonyms()) {
