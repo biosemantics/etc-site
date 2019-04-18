@@ -9,9 +9,10 @@ database_minConnectionsPerPartition=10
 database_maxConnectionsPerPartition=20
 
 #Files
-collectionsPath=C:/Users/hongcui/Documents/etcsite/data/alignment
+collectionsPath=/var/lib/etcsite/data/alignment
 
-wordnet_directory=C:/Users/hongcui/Documents/etcsite/resources/shared/wordnet/wn31/dict
-glossariesDownloadDirectory=C:/Users/hongcui/Documents/etcsite/data/textCapture/glossaries
+wordnet_directory=/var/lib/etcsite/resources/shared/wordnet/wn31/dict
+glossariesDownloadDirectory=/var/lib/etcsite/data/textCapture/glossaries
 oto_url=http://biosemantics.arizona.edu:8080/OTO
 stateWeight=3
+

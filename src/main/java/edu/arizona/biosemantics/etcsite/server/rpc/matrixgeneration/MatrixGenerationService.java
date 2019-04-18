@@ -301,7 +301,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		String taxonGroup = config.getTaxonGroup().getName().toUpperCase();
 		
 		try {
-			if(!inputOntology.isEmpty()){
+			if(!inputOntology.isEmpty()){//Hong 4/16 soza run, input ontology is empty
 				List<String> files = fileService.getDirectoriesFiles(token, inputOntology);
 				for(String file : files) {
 					if(file.endsWith(".owl") && !file.startsWith("module.") && !file.equals("ModifierOntology.owl")) {
@@ -366,6 +366,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 		     			ListenableFuture<Void> futureResult = activeProcessFutures.remove(config.getConfiguration().getId());
 		     			if(enhance.isExecutedSuccessfully()) {
 		     				if(!futureResult.isCancelled()) {
+		     					log(LogLevel.DEBUG, "Enhance for matrix generation completed, starting matrix generation");
 		     					doMatrixGeneration(token, task, config, enhanceDir);
 		     				}
 		     			} else {

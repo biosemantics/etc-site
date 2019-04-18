@@ -41,7 +41,9 @@
   <inherits name='edu.arizona.biosemantics.etcsitehelp.EtcSiteHelp' />
   
   <inherits name="gwtupload.GWTUpload"/>
-   
+  
+ 
+  
   
   <!-- Has to appear after Matrix_review, since Matrix_review uses Blue and would overwrite -->
   <!-- <inherits name='com.sencha.gxt.theme.gray.Gray' /> -->

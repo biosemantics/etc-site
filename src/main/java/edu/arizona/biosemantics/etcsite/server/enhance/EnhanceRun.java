@@ -81,32 +81,6 @@ import edu.arizona.biosemantics.semanticmarkup.enhance.transform.old.Standardize
 
 public class EnhanceRun {
 
-	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException, ClassNotFoundException, OWLOntologyCreationException {
-		//String inputDir = "C:/etcsitebase/etcsite/data/users/4/plant_output_by_TC_task_Plant3files_07-03-2017_1";
-		//String enhanceDir = "C:/etcsitebase/etcsite/data/matrixGeneration/432/enhance";
-		//String inputOntology = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_output_by_TC_task_2_output_by_OB_task_3/3.owl";
-		//String termReviewTermCategorization = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_TermsReviewed_by_TC_task_2/category_term-task-2.csv";
-		//String termReviewSynonyms = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_TermsReviewed_by_TC_task_2/category_mainterm_synonymterm-task-2.csv";
-		
-		String inputDir = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\in";
-		String enhanceDir ="C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\out";
-		String inputOntology = "C:/Users/hongcui/Documents/research/AuthorOntology/Data/CarexOntology/Structure224.owl";
-		String partOfCSV = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\part_of.csv";
-		String termReviewTermCategorization = "C:/Users/hongcui/Documents/etcsite/data/users/1/TestMGValue_TermsReviewed_by_TC_task_TestMGValue1/category_term-task-TestMGValue1.csv";
-		String termReviewSynonyms = "C:/Users/hongcui/Documents/etcsite/data/users/1/TestMGValue_TermsReviewed_by_TC_task_TestMGValue1/category_mainterm_synonymterm-task-TestMGValue1.csv";
-		
-		ArrayList<String> knowsPartOf = new ArrayList<String>();
-		knowsPartOf.add(inputOntology);
-		knowsPartOf.add("C:/Users/hongcui/Documents/etcsite/resources/shared/ontologies/po.owl");
-		knowsPartOf.add(partOfCSV);
-
-		String taxonGroup = TaxonGroup.PLANT.toString();
-		
-		EnhanceRun enhance = new EnhanceRun(inputDir, enhanceDir, knowsPartOf, 
-				termReviewTermCategorization, termReviewSynonyms, TaxonGroup.valueOf(taxonGroup));
-		enhance.run();
-	}
-	
 	private String negWords = "no|not|never";
 	private String advModifiers = "at least|at first|at times";
 	private String stopWords = "a|about|above|across|after|along|also|although|amp|an|and|are|as|at|be|because|become|becomes|becoming|been|before|being|"
@@ -370,5 +344,31 @@ public class EnhanceRun {
 			if(!gsyns.contains(new Term(termCategory.getTerm().replaceAll("_", "-"), termCategory.getCategory())))
 				glossary.addEntry(termCategory.getTerm().replaceAll("_", "-"), termCategory.getCategory()); //primocane_foliage =>primocane-foliage Hong 3/2014
 		}
+	}
+	
+	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException, ClassNotFoundException, OWLOntologyCreationException {
+		//String inputDir = "C:/etcsitebase/etcsite/data/users/4/plant_output_by_TC_task_Plant3files_07-03-2017_1";
+		//String enhanceDir = "C:/etcsitebase/etcsite/data/matrixGeneration/432/enhance";
+		//String inputOntology = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_output_by_TC_task_2_output_by_OB_task_3/3.owl";
+		//String termReviewTermCategorization = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_TermsReviewed_by_TC_task_2/category_term-task-2.csv";
+		//String termReviewSynonyms = "C:/Users/rodenhausen.CATNET/Desktop/etcsite/data/users/1/1_TermsReviewed_by_TC_task_2/category_mainterm_synonymterm-task-2.csv";
+		
+		String inputDir = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\in";
+		String enhanceDir ="C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\out";
+		String inputOntology = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\Structure224.owl";
+		String partOfCSV = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\part_of.csv";
+		String termReviewTermCategorization = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\terms.csv";
+		String termReviewSynonyms = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\synonym.csv";
+		
+		ArrayList<String> knowsPartOf = new ArrayList<String>();
+		knowsPartOf.add(inputOntology);
+		knowsPartOf.add("C:/Users/hongcui/Documents/etcsite/resources/shared/ontologies/po.owl");
+		knowsPartOf.add(partOfCSV);
+
+		String taxonGroup = TaxonGroup.PLANT.toString();
+		
+		EnhanceRun enhance = new EnhanceRun(inputDir, enhanceDir, knowsPartOf, 
+				termReviewTermCategorization, termReviewSynonyms, TaxonGroup.valueOf(taxonGroup));
+		enhance.run();
 	}
 }

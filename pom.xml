@@ -338,18 +338,18 @@
 		<dependency>
 			<groupId>edu.arizona.biosemantics.common.ontology</groupId>
 		 	<artifactId>graph</artifactId>
-		  	<version>0.0.10-SNAPSHOT</version>
+		  	<version>0.0.11-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>edu.arizona.biosemantics.common.ontology</groupId>
 		 	<artifactId>graph</artifactId>
-		  	<version>0.0.10-SNAPSHOT</version>
+		  	<version>0.0.11-SNAPSHOT</version>
 		  	<classifier>sources</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.oto2</groupId>
 		  <artifactId>oto</artifactId>
-		  <version>0.0.138-debug-SNAPSHOT</version>
+		  <version>0.0.139-SNAPSHOT</version>
 		  <classifier>sources</classifier>
 		  <exclusions>
 		  	<exclusion>
@@ -361,7 +361,7 @@
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.oto2</groupId>
 		  <artifactId>oto</artifactId>
-		  <version>0.0.138-debug-SNAPSHOT</version>
+		  <version>0.0.139-SNAPSHOT</version>
 		  <classifier>classes</classifier>
 		</dependency>
 		<dependency>
@@ -379,13 +379,13 @@
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.matrixgeneration</groupId>
 		  <artifactId>matrix-generation</artifactId>
-		  <version>0.1.72-SNAPSHOT</version>
+		  <version>0.1.73-SNAPSHOT</version>
 		  <classifier>sources</classifier>
 		</dependency>
 		<dependency>
 		  <groupId>edu.arizona.biosemantics.matrixgeneration</groupId>
 		  <artifactId>matrix-generation</artifactId>
-		  <version>0.1.72-SNAPSHOT</version>
+		  <version>0.1.73-SNAPSHOT</version>
 		  <exclusions>
 		  	<exclusion>
 		  		<artifactId>owlapi-tools</artifactId>
@@ -650,7 +650,7 @@
 		<dependency>
 		<groupId>edu.arizona.biosemantics.oto</groupId>
 		<artifactId>oto-client</artifactId>
-		<version>0.0.55-SNAPSHOT</version>
+		<version>0.0.57-SNAPSHOT</version>
 			</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
@@ -745,6 +745,7 @@
 				<!-- Plugin configuration. There are many available options, see gwt-maven-plugin 
 					documentation at codehaus.org -->
 				<configuration>
+
 <!-- 				    <logLevel>DEBUG</logLevel> -->
                     <logLevel>INFO</logLevel>
 					<runTarget>index.html</runTarget>

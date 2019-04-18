@@ -58,8 +58,8 @@ public class ExtraJvmEnhance extends ExtraJvmCallable<Void> implements Enhance {
 					//System.out.println("Done Running Minimal Enhance");
 				}*/			
 			} catch (Throwable t) {
-				//System.out.println("ExtraJvmEnhance failed with throwable "+t.getMessage());
-				//System.out.println(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(t));
+				System.out.println("ExtraJvmEnhance failed with throwable "+t.getMessage());
+				System.out.println(org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(t));
 				
 				if(t.getCause()!=null) //System.out.println("caused by "+org.apache.commons.lang.exception.ExceptionUtils.getStackTrace(t.getCause()));
 				System.exit(-1);
@@ -147,11 +147,19 @@ public class ExtraJvmEnhance extends ExtraJvmCallable<Void> implements Enhance {
 		return null;
 	}
 	
-	/**/
+	/*not useful, no authentication tokens for this*/
 	public static void main(String[] args) throws Exception {
 		//MatrixGeneration mg = new MatrixGeneration("C:/test/users/1070/input_2", "C:/test/temp/matrixGeneration/124/Matrix.mx");
-		ExtraJvmEnhance mg = new ExtraJvmEnhance("C:/Users/hongcui/Documents/etcsite/data/users/1/TestMGValue_output_by_TC_task_TestMGValue1", 
-				"C:Users/hongcui/Documents/etcsite/data/matrixGeneration/40/enhance", "", "", "", "PLANT");
+		String inputDir = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\in";
+		String enhanceDir ="C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\out";
+		String inputOntology = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\Structure224.owl";
+		String partOfCSV = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\part_of.csv";
+		String termReviewTermCategorization = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\terms.csv";
+		String termReviewSynonyms = "C:\\Users\\hongcui\\Documents\\etc-development\\enhance\\synonym.csv";
+		
+		String knows = inputOntology+ "#C:\\Users\\hongcui\\Documents\\etcsite\\resources\\shared\\ontologies\\po.owl#"+partOfCSV;
+		
+		ExtraJvmEnhance mg = new ExtraJvmEnhance(inputDir, enhanceDir, knows, termReviewTermCategorization, termReviewSynonyms, "PLANT");
 		mg.call();
 		
 	}

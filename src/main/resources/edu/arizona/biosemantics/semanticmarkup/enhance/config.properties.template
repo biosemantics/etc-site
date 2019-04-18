@@ -1,2 +1,24 @@
+#nonSpecificParts=apex|appendix|area|band|base|belt|blade|body|cavity|cell|center|centre|chamber|component|content|crack|edge|element|end|face|groove|layer|line|margin|middle|notch|part|pore|portion|protuberance|remnant|section|side|stratum|surface|tip|top|wall|zone
+nonSpecificParts=apex|base|edge|face|margin
+spatial=adaxial|abaxial|intervenal|inter|outter|distal|distalmost
+connectBackwardToParent=has|have|with|contains
+connectForwardToParent=in|on|of
+
+
+databaseHost=
+databasePort=
+databaseName=
+databaseUser=
+databasePassword=
+workspaceDirectory=
+perlSourceDirectory=
+glossariesDownloadDirectory=
 ontologyDirectory=
 wordNetDirectory=
+otoUrl=http://biosemantics.arizona.edu:8080/OTO
+oto2Url=http://etc-dev.cs.umb.edu/oto2
+#oto2Url=http://localhost:8888
+threading=false,1,1  #format {true,false},{n},{m}  where first parameter activates,deactivates; n=, m=
+database_partitionCount=2
+database_minConnectionsPerPartition=1
+database_maxConnectionsPerPartition=3
