@@ -274,7 +274,7 @@ public class MatrixGenerationService extends RemoteServiceServlet implements IMa
 			}else{
 				//if(isEnhanceAndMatrixGeneration(config.getInputTermReview(), config.getInputOntology())) {
 					//doMatrixGeneration(token, task, config, config.getInput());
-					//log(LogLevel.DEBUG, "doEnhanceAndMatrixGeneration");
+					log(LogLevel.DEBUG, "doEnhanceAndMatrixGeneration");
 					doEnhanceAndMatrixGeneration(token, task, config);
 				//} else {
 				//	log(LogLevel.DEBUG, "doMinimalEnhanceAndMatrixGeneration");

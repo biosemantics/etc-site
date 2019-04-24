@@ -7,6 +7,8 @@ public enum TaskStageEnum {
     //OUTPUT("Output");
 
     private String displayName;
+    
+    private TaskStageEnum(){}
 
     private TaskStageEnum(String displayName) {
         this.displayName = displayName;
